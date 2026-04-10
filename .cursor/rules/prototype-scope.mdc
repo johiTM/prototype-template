@@ -1,0 +1,65 @@
+# Prototype Scope
+
+## Purpose
+This is a prototype — not production code. The goal is something testable with real users, built fast. Always optimise for speed and clarity over perfection.
+
+---
+
+## The One Question to Ask Before Building Anything
+> "Does this help test the idea with a user, or am I just over-engineering?"
+
+If it doesn't help test the idea — skip it.
+
+---
+
+## What to Build
+- The happy path only
+- Realistic mock data (no "Lorem Ipsum", no "User 1, User 2")
+- Enough visual fidelity to feel like a real Trackman product
+- Interactions that are relevant to what's being tested
+
+## What to Skip
+- Authentication — use a hardcoded mock user
+- Error states — unless the error handling IS what's being tested
+- Loading states — unless the loading experience IS what's being tested
+- Form validation — keep it minimal
+- Unit tests — not needed
+- Performance optimisation — not needed
+- Responsive design — desktop first unless mobile is the point
+- Animations — only if directly relevant to the UX being tested
+
+---
+
+## Trackman Look & Feel
+Prototypes should look like Trackman products, not generic AI output.
+
+- Always use TDS4 tokens for colours (see designsystem.mdc)
+- Background: `--tds-color-surface-elevation-0-default` (#f6f6f6) — never plain white
+- Brand colour is orange (`--tds-color-surface-brand-default`) — not blue, not grey
+- Data visualisation: use categorical colours in order, positive = green, negative = red
+- Use realistic Trackman data — distances in yards, speeds in mph, real-sounding player names
+
+---
+
+## Mock Data Rules
+- Keep mock data in `lib/mockData.ts`
+- Make it realistic — a designer showing this to a PO or user should not have to say "ignore the dummy data"
+- Trackman context: golf shots, ball speed, launch angle, carry distance, player profiles, session data
+
+---
+
+## Complexity Check
+If Cursor suggests any of the following unprompted — stop and question whether it's needed:
+- Setting up authentication or user sessions
+- Complex state management (Redux, Zustand)
+- API integrations beyond what's being tested
+- Database setup (if you need a backend, ask explicitly and follow `docs/5-setup-supabase.md`)
+- Abstracting components into a shared library
+
+---
+
+## Definition of Done for a Prototype
+- A user can click through the relevant flow
+- It looks like a Trackman product
+- It uses realistic data
+- It can be deployed to Vercel and shared via a link

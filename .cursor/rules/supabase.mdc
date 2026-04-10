@@ -1,0 +1,66 @@
+# Supabase Setup
+
+## When to use this
+Only when the designer asks to "add a backend", "connect real data", or "set up a database".
+Most prototypes do not need this. If mock data works, use that instead.
+
+---
+
+## Rules
+- Keep the schema simple. Only create tables that are actually needed.
+- Use realistic Trackman seed data, not placeholder values
+- Do not set up authentication unless the prototype is specifically testing a login flow
+- Disable Row Level Security (RLS) for prototypes to keep things simple
+- Store credentials in `.env.local`, never in the codebase
+- Add `.env.local` to `.gitignore` before doing anything else
+
+---
+
+## Setup Process
+
+### 1. Ask the designer
+Before doing anything, ask:
+- "What data does this prototype need to store?"
+- "Do multiple users need to interact with the same data, or is this single user?"
+
+Keep the schema as simple as possible based on the answers.
+
+### 2. Install Supabase client
+```bash
+npm install @supabase/supabase-js
+```
+
+### 3. Create the Supabase client
+Create `lib/supabase.ts`:
+```ts
+import { createClient } from '@supabase/supabase-js'
+
+export const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+)
+```
+
+### 4. Add environment variables
+Create `.env.local` in the project root:
+```
+NEXT_PUBLIC_SUPABASE_URL=your-project-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+```
+
+Tell the designer:
+> "You need a Supabase account to continue. Go to https://supabase.com, create a free project, choose West EU (Ireland) as the region, then go to Settings > API and paste your Project URL and Anon Key into `.env.local`."
+
+### 5. Create tables and seed data
+Write SQL to create the tables and insert realistic seed data.
+Present the SQL to the designer and ask them to run it in the Supabase SQL editor before continuing.
+
+### 6. Verify the connection
+After credentials are added, test the connection with a simple fetch before building anything on top of it.
+
+---
+
+## Seed Data Guidelines
+- Use realistic Trackman values: distances in yards, speeds in mph, real-sounding player names
+- Include enough rows to make the UI feel real (minimum 5 to 10 rows per table)
+- Cover different statuses and states where relevant (e.g. active, inactive, pending)

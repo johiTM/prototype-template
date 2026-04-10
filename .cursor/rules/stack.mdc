@@ -1,0 +1,115 @@
+# Prototype Stack
+
+## Core Stack
+
+| Decision | Chosen | Alternative |
+|---|---|---|
+| Framework | Next.js (App Router) | Plain React + Vite (simpler, but less AI tooling support) |
+| Styling | Tailwind CSS | CSS Modules or plain CSS |
+| Components | Shadcn/ui + TDS4 (when available) | Building custom components from scratch |
+| Language | TypeScript (relaxed) | JavaScript (no types at all) |
+| Package manager | npm | yarn, pnpm |
+| Database | None by default — mock data only | If you need a real backend, ask Cursor to "add a backend" and it will walk you through Supabase setup (see supabase.mdc) |
+| Deployment | Vercel | None — run locally only |
+
+---
+
+## Why These Choices
+
+- **Next.js** — AI tools like Cursor and Claude Code default to it, so generated code needs less correction. Deploys to Vercel with zero config.
+- **Tailwind** — styles live inline, no separate CSS files to manage. Faster to iterate.
+- **Shadcn/ui** — pre-built accessible components that use Tailwind. Swap for TDS4 components as they become available.
+- **TypeScript relaxed** — gives some type safety without slowing down prototype speed.
+- **No database by default** — mock data is faster and enough for most prototype testing. If a prototype needs real data or persistence, ask Cursor to "add a backend" and it will trigger the Supabase setup flow.
+
+---
+
+## Project Structure
+
+```
+my-prototype/
+  app/
+    layout.tsx        ← global layout, import TDS4 tokens here
+    page.tsx          ← entry point
+    [feature]/
+      page.tsx
+  components/         ← prototype-specific components
+  lib/                ← helpers, mock data, utils
+  public/             ← static assets
+  .cursor/
+    rules/            ← all .mdc rule files live here
+      stack.mdc
+      designsystem.mdc
+      deploy.mdc
+      supabase.mdc    ← only activated when you ask to "add a backend"
+```
+
+---
+
+## Key Conventions
+
+**Imports**
+- TDS4 components: available once published to npm (see designsystem.mdc)
+- Shadcn components: `@/components/ui`
+
+**TypeScript**
+- Use types where obvious, skip where it slows you down
+- `any` is acceptable in prototypes — don't waste time on perfect types
+- Props interfaces are optional for one-off components
+
+**File naming**
+- Components: PascalCase → `ScoreCard.tsx`
+- Pages: lowercase → `page.tsx` (Next.js convention)
+- Utilities: camelCase → `formatScore.ts`
+
+**Styling**
+- Use Tailwind utility classes for layout and spacing
+- Use TDS4 CSS variables for all colours — never hardcode hex values
+- Reference: `var(--tds-color-*)` — see designsystem.mdc for full list
+
+---
+
+## Mock Data
+
+- Keep mock data in `lib/mockData.ts`
+- Use realistic Trackman values (distances in yards, speeds in mph, realistic player names)
+- Don't connect to real APIs unless the prototype specifically needs it
+
+---
+
+## What to Skip in Prototypes
+
+- **Authentication** — hardcode a mock user if needed
+- **Error handling** — happy path only unless the error state is what's being tested
+- **Loading states** — only add if relevant to the UX being tested
+- **Unit tests** — not needed for prototypes
+- **Performance optimisation** — don't worry about it
+
+The goal is something testable with users, not production-ready code.
+
+---
+
+## Common Commands
+
+```bash
+npm run dev       # Start dev server → localhost:3000
+npm run build     # Build before deploying
+npx vercel        # Deploy (see deploy.mdc for full setup)
+```
+
+---
+
+## Tone of Voice
+- Act as a senior full-stack developer and senior product designer
+- When writing or explaining code, assume the reader is a product designer — not a developer
+- Be short and to the point — no long explanations unless asked
+- Use short sentences, clear structure, no walls of text
+- When something needs a decision, present options clearly rather than assuming
+- Ask before assuming on anything product or data related
+
+---
+
+## Prototyping Intent
+- This is a design tool, not a production codebase — always optimise for speed and testability over perfection
+- When in doubt about scope, do less and ask
+- Prototypes should look like real Trackman products — not generic AI output
