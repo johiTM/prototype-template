@@ -1,162 +1,56 @@
-# Product Context: Bookings & Payments (B&P / YGB)
+# Product Context
 
-> This file provides business, product, and team context for working on the Bookings & Payments codebase and design system. It is intended as a reference for designers and developers onboarding to the product.
+**Status:** 🟡 TEMPLATE — Fill this in before starting your first prototype.
+<!-- Once filled, change status to: ✅ FILLED -->
 
----
+> Fill in the sections below. Delete anything that does not apply.
+> Once complete, reuse this file in every new prototype — no need to fill it in again.
+> Cursor will use this to make better decisions about what you are building.
 
-## 1. Company & Product Background
-
-**Trackman** is a sports technology company best known for its golf launch monitor hardware and software ecosystem (simulators, ranges, the Trackman Golf App, and the Trackman Portal).
-
-**Your Golf Booking (YGB)** is a UK-founded booking and payments platform that Trackman acquired a few years ago. It was originally built as a standalone SaaS product for golf venues (driving ranges, indoor simulator centres, golf clubs). Post-acquisition, YGB became the engine behind **Bookings & Payments (B&P)** — Trackman's official booking and payments solution for facility operators.
-
-B&P is embedded inside the **Trackman Portal** as an iFrame, giving Trackman customers access to it within their existing ecosystem while YGB continues to run as an independent backend service.
-
-> **Key nuance:** YGB still has its own non-Trackman customers and operates under its own brand identity, codebase, and design system. It is not yet fully merged with Trackman.
+## How to update this file
+- Add new terms to the terminology table as they come up during a session
+- Add to technical constraints as new limitations are discovered
+- Do not rewrite existing sections without checking first
 
 ---
 
-## 2. What the Product Does
-
-B&P serves as the **operational and financial layer** for golf venues in the Trackman ecosystem. It consists of four core products:
-
-| Product | Description |
-|---|---|
-| **Bookings – Range** | Bay booking management for driving ranges (Classic View: fixed duration, high bay count) |
-| **Bookings – Indoor** | Bay booking for indoor simulator venues (Calendar View: variable duration, fewer bays) |
-| **Point of Sale (POS)** | In-venue product sales, upselling at time of booking, staff-facing |
-| **Tee Sheets** | Booking management for minigolf, footgolf, and outdoor golf courses |
-
-### Core capabilities
-- Scheduling and management of bays, courses, and events
-- Customer accounts, memberships, and subscription management
-- Payment processing via Adyen, Square, and other integrated processors
-- Hardware integrations: ball dispensers (Range Servant, Select PI, EGM, E-Range, Amtech, GolfMore, Badcock, RAS), smart locks (Openpath/Avigilon), and Trackman simulator hardware
-- GolfNow distribution integration
-- Online booking (web + Trackman Golf App) and walk-in/admin booking flows
-
-### System hierarchy (data model)
-```
-Organization (Legal Entity)
-└── Venues (Physical Locations)
-    ├── Ranges / Simulators / Courses
-    │   ├── Bays / Holes (Bookable Units)
-    │   └── Bay Options / Course Options / Player Options
-    ├── Memberships / Discounts / Flags
-    ├── Products & Extras
-    └── Payment Configurations / Methods / Invoices / Subscriptions
-```
-
-### Two admin environments
-| Environment | URL | Used by |
-|---|---|---|
-| **Venue Admin** | `/booking-and-payments/admin` | Venue managers, staff — daily ops, bookings, POS, memberships |
-| **Organization Admin** | `/booking-and-payments/org` | Org owners, franchise managers — company-wide settings, payment config, billing |
+## What this product does
+[One paragraph. What is it, who uses it, what problem does it solve.]
 
 ---
 
-## 3. Users
-
-Three distinct user types interact with the product:
+## Users
 
 | User | Interface | Goals |
 |---|---|---|
-| **Organization Owner / Franchise Manager** | `/org` admin | Multi-venue oversight, payment integrations, invoicing |
-| **Venue Manager / Staff** | `/admin` | Daily bookings, POS sales, customer management |
-| **Golfer / End User** | Public booking pages, Trackman Golf App, in-venue kiosks | Book sessions, buy products, manage their account |
+| [User type] | [Where they work] | [What they are trying to do] |
 
 ---
 
-## 4. Current Product Health (NPS, 2025)
-
-This is the honest picture — not the sales pitch.
-
-- **Portal NPS: +32** (292 responses) — reasonable baseline; users can complete core tasks
-- **Booking & Payments NPS: -1** (174 responses) — near-even split between promoters and detractors
-
-### Key pain areas (by priority)
-
-1. **Booking Workflow** *(23 mentions — Critical)*
-   Users cannot edit bookings after creation, cannot add time mid-session, no drag-and-drop, and customers cannot self-serve. The day/time overview is considered unclear and requires too many clicks.
-
-2. **Payments & Integrations** *(20 mentions — Critical)*
-   No split payment (cash + card), no saved cards, limited payment provider flexibility, POS integration gaps, missing international payment support (particularly Africa).
-
-3. **Memberships** *(19 mentions — High, highest emotional intensity)*
-   Perks are tied to calendar month rather than billing cycle — a well-known pain point with real business impact. Membership creation is complex, editing is cumbersome, and customers cannot self-manage.
-
-4. **Reporting & Data Export** *(13 mentions — High)*
-   No easy CSV/Excel export, inflexible filtering, visit tracking and usage hours not surfaced, payment reconciliation is insufficient.
-
-5. **Mobile / Responsive Design** *(12 mentions — High)*
-   Portal does not adapt well to mobile. No dedicated app. Mobile Safari usage confirmed in device data but experience is not optimised.
-
-> **Note:** Tournaments & Leagues feedback is handled by a separate team and excluded from these findings.
+## Key pain areas
+[What are the biggest problems users have with the current product?]
 
 ---
 
-## 5. Technical Context
-
-### Codebase
-- YGB was built from scratch by Jake (the original founder), who recently rolled off the project. His deep knowledge of the codebase was a bottleneck for developers, and that knowledge transfer is still in progress.
-- The codebase is complex and has been heavily customised for specific edge cases over time. This makes it difficult to remove functionality without risk — changes need careful consideration.
-- Junior developers cannot be hired for this reason. The team needs engineers who can navigate a non-trivial, legacy-adjacent system.
-
-### Design system
-- YGB has its **own design system**, separate from Trackman's.
-- The current **Trackman Design System is not compatible** with the YGB design system.
-- A **new Trackman Design System is in development** — migration to it is planned but cannot begin until it is released. Until then, we work within the existing YGB system.
-- The migration will eventually bring B&P in line with the broader Trackman product family visually and technically.
-
-### Integration model
-- B&P is embedded in the Trackman Portal as an **iFrame**.
-- Trackman and YGB/B&P maintain **separate data models** synced via APIs — not a single shared database.
-- Trackman hardware (bays, simulators) is linked to B&P entities (venues, bays) through API matching.
+## Technical constraints
+[What can and cannot be changed? What are the hard limitations designers should know about before prototyping?]
 
 ---
 
-## 6. Team
-
-| Role | Location |
-|---|---|
-| Designer (1) | Denmark |
-| Product Owner (1) | Denmark |
-| QA (1) | Denmark |
-| Developers (3) | Denmark |
-| Developers (2) | UK |
-
-The team is lean. Developer capacity is consistently constrained by a **high volume of incoming bugs and ad-hoc fixes** driven by the platform's active usage. Larger UX/UI rework is not currently planned or resourced.
+## Design priorities
+[What matters most right now? What should this prototype focus on?]
 
 ---
 
-## 7. Design Priorities & Constraints
-
-### What needs work
-A significant amount of UX/UI needs to be rethought from the ground up — particularly in the areas flagged by NPS (booking workflow, memberships, payments). However, due to developer capacity constraints, this is not on the near-term roadmap.
-
-### What designers should know before starting
-- **Don't design for the ideal codebase.** The complexity of the system means some things that look simple to redesign are not straightforward to implement. Work closely with developers early.
-- **Respect existing patterns unless you have a strong reason to break them.** Until the new Trackman Design System lands, stay within the YGB design system.
-- **The iFrame constraint is real.** Because B&P is embedded in the Trackman Portal, there are layout and navigation constraints that affect what's possible in the UI.
-- **Edge cases are everywhere.** The system has been customised for a wide range of venue types and configurations. A design that works for a 50-bay driving range may not work for a 3-bay indoor simulator venue.
-- **Mobile is an acknowledged gap.** Don't design exclusively for desktop, but know that a full mobile solution is a long-term initiative, not a current sprint.
-
-### Current AI initiatives
-The designer has access to the codebase and is actively exploring AI-assisted development to help bridge the gap between design intent and implementation — particularly useful given developer bandwidth.
-
----
-
-## 8. Key Terminology
+## Key terminology
 
 | Term | Meaning |
 |---|---|
-| **YGB** | Your Golf Booking — the original product and underlying infrastructure |
-| **B&P** | Bookings & Payments — the Trackman-branded version of YGB |
-| **The Portal** | Trackman's main customer-facing platform (web app); B&P is embedded here |
-| **TM Golf App** | Trackman's end-user mobile app; used for player-facing bookings |
-| **TPS** | Trackman Performance Studio — the simulator software that integrates with B&P for bay locking/unlocking |
-| **Org Admin** | Organisation-level admin environment (`/org`) |
-| **Venue Admin** | Venue-level admin environment (`/admin`) |
-| **Bay** | A bookable unit within a venue (simulator bay, range bay) |
-| **Classic View** | Booking UI for ranges — fixed duration, availability shown per time slot |
-| **Calendar View** | Booking UI for indoor venues — variable duration, full-day availability shown |
+| [Term] | [What it means in this product context] |
+
+---
+
+## References
+- Production site: [URL or local path]
+- Design system: [Link or path]
+- Research data: [Path to NPS, user feedback, or any other relevant data]

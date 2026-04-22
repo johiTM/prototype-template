@@ -6,7 +6,7 @@ This is a starting point for Trackman product prototypes. Read this file before 
 
 ## What this is
 
-A prototype template for Trackman product designers. The goal is always something testable with real users, built fast. Optimise for speed and clarity over perfection.
+A prototype template for Trackman product designers. The goal is always something testable with real users, built fast. Optimise for speed over production hardening (error handling, accessibility passes, performance tuning, edge-case coverage) — but layout, typography, spacing and colour should still match the agreed Figma frames unless the PRD says otherwise.
 
 ---
 
@@ -104,6 +104,15 @@ All tokens follow: `--tds-{category}-{subcategory}-{variant}`
 - For data visualisation, always use categorical colours in order (1→8)
 - Positive = green, Negative = red, Neutral = yellow — always
 
+### Mapping Figma values to TDS tokens
+
+Figma Inspect shows raw values (hex, px, font sizes). These must be translated to TDS tokens, not pasted in as-is.
+
+- Colours: match the Figma hex to the nearest token in `design-tokens.all.css`. If the hex does not match any token, do not invent a new colour — flag it to the designer and ask which token to use.
+- Spacing and radius: round to the nearest `--tds-spacing-*` / `--tds-radius-*` step. If a Figma value is more than one step away from the nearest token, flag it rather than approximating silently.
+- Typography: map to the nearest `--tds-text-style-*` shorthand. Do not compose ad-hoc font-size / line-height pairs if a text style already covers it.
+- If Figma specs a value that has no reasonable token equivalent, stop and ask the designer — do not hardcode and do not guess.
+
 ### TDS4 fonts
 
 TDS4 uses three typefaces. Always load these — never use the Next.js default Geist fonts.
@@ -154,8 +163,8 @@ TDS4 React components are in progress. For now, use Shadcn/ui for all components
 - Form validation — keep it minimal
 - Unit tests — not needed
 - Performance optimisation — not needed
-- Responsive design — desktop first unless mobile is the point
-- Animations — only if directly relevant to the UX being tested
+- Responsive design — build the breakpoints listed in the PRD. If Figma includes mobile/tablet frames and the PRD has them in scope, they must be built. Default to desktop only when the PRD does not specify.
+- Animations — build motion that is specced in the Figma frames in scope, or that IS what's being tested. Skip decorative motion not in the PRD.
 
 ### The one question to ask before building anything
 

@@ -84,3 +84,14 @@ These are the tokens you'll reach for most often. For the full set, read `design
 - For data visualisation, always use categorical colours in order (1→8)
 - Positive = green, Negative = red, Neutral = yellow — always
 - For spacing, radius, typography, and the full colour palette — read `design-tokens.all.css`
+
+---
+
+## Mapping Figma values to TDS tokens
+
+Figma Inspect shows raw values (hex, px, font sizes). These must be translated to TDS tokens, not pasted in as-is.
+
+- Colours: match the Figma hex to the nearest token in `design-tokens.all.css`. If the hex does not match any token, do not invent a new colour — flag it to the designer and ask which token to use (or whether to add one).
+- Spacing and radius: round to the nearest `--tds-spacing-*` / `--tds-radius-*` step. If a Figma value is more than one step away from the nearest token, flag it rather than approximating silently.
+- Typography: map to the nearest `--tds-text-style-*` shorthand. Do not compose ad-hoc font-size / line-height pairs if a text style already covers it.
+- If Figma specs a value that has no reasonable token equivalent, stop and ask the designer — do not hardcode and do not guess.

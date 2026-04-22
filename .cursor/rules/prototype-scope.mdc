@@ -1,7 +1,7 @@
 # Prototype Scope
 
 ## Purpose
-This is a prototype — not production code. The goal is something testable with real users, built fast. Always optimise for speed and clarity over perfection.
+This is a prototype — not production code. The goal is something testable with real users, built fast. Optimise for speed over production hardening (error handling, accessibility passes, performance tuning, edge-case coverage) — but layout, typography, spacing and colour should still match the agreed Figma frames unless the PRD says otherwise.
 
 ---
 
@@ -25,8 +25,8 @@ If it doesn't help test the idea — skip it.
 - Form validation — keep it minimal
 - Unit tests — not needed
 - Performance optimisation — not needed
-- Responsive design — desktop first unless mobile is the point
-- Animations — only if directly relevant to the UX being tested
+- Responsive design — build the breakpoints listed in the PRD. If Figma includes mobile/tablet frames and the PRD has them in scope, they must be built. Default to desktop only when the PRD does not specify.
+- Animations — build motion that is specced in the Figma frames in scope, or that IS what's being tested. Skip decorative motion not in the PRD.
 
 ---
 

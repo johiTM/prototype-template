@@ -50,11 +50,15 @@ If the designer provided a Figma link in Step 1:
 1. Use the Figma MCP (`get_design_context`) to fetch the design for the linked node
 2. Read the designs and extract: layout, key screens, component patterns, copy, and any designer annotations
 3. Summarise what you found in a short message to the designer:
-   - Which screens / flows you can see
+   - Which screens / flows you can see (list the frame names — these become the candidate list of authoritative frames for the PRD)
+   - Breakpoints present in the file (desktop / tablet / mobile)
+   - Any motion or interaction annotations worth noting
    - Any design decisions or constraints worth noting
    - Anything unclear or missing from the designs
 4. Ask:
-   > "I've reviewed the Figma designs. Does this match what you want to build, or are there corrections before I write the PRD?"
+   > "I've reviewed the Figma designs. Does this match what you want to build? Before I write the PRD, confirm: (a) which of these frames are authoritative for the build, (b) which breakpoints are in scope, and (c) whether motion/animations should be implemented."
+
+Record the answers and carry them into the PRD's "Design Considerations" section (authoritative frames, Figma fidelity, breakpoints, motion).
 
 Wait for the designer's confirmation before continuing.
 
