@@ -5,8 +5,9 @@
 **The sequence is always: Discovery → Figma → PRD → Task List → Setup → Build → Deploy. Never skip ahead.**
 
 **Do NOT:**
+
 - Run any commands or write any code before completing Steps 1–4
-- Skip the Figma step if a link is provided
+- Skip the Figma step if a link was provided
 - Start building before the PRD and task list are both written and approved
 - Ask more than the questions listed in Step 1 — collect everything in one shot
 
@@ -15,6 +16,7 @@
 ## Trigger
 
 Run this flow whenever the user says anything like:
+
 - "Start a prototype"
 - "I want to make a prototype"
 - "Start new prototype"
@@ -104,49 +106,38 @@ Only run this after the designer has approved the task list.
 
 Run the following in sequence. Tell the user what you're doing at each step.
 
-### 5a. Create the Next.js app
+### 5a. Static site scaffold
+
+Ensure the project has:
+
+- `index.html` at the root with `<link>` to CSS and `<script type="module">` for `js/main.js`
+- `css/styles.css` — global styles and `:root` variables (see design-system.mdc for brand alignment)
+- `js/main.js` — bootstraps the UI
+- `js/mockData.js` — mock data module
+
+If the repo is this template, these files may already exist — extend them rather than replacing wholesale unless the PRD requires a different structure.
+
+### 5b. Fonts
+
+Use Google Fonts (or equivalent) in `index.html` for **Inter** (body) and **Oswald** (display). Wire `font-family` in CSS — see starter `index.html` / `css/styles.css` for the pattern.
+
+### 5c. Mock data
+
+Ensure `js/mockData.js` exists and exports realistic placeholder data; expand during build tasks.
+
+### 5d. Start a local static server
+
+ES modules require HTTP — do not rely on opening `index.html` via `file://`.
+
 ```bash
-npx create-next-app@latest [project-name] --typescript --tailwind --app --no-src-dir --import-alias "@/*" --no-eslint
+npx serve .
 ```
 
-### 5b. Install Shadcn/ui
-```bash
-npx shadcn@latest init -d
-```
-
-### 5c. Copy and import design tokens
-Copy `design-tokens.all.css` from the template root into the project root, then add to `app/globals.css` as the very first import:
-```css
-@import "../design-tokens.all.css";
-```
-
-### 5d. Set up TDS4 fonts
-Replace the default fonts in `app/layout.tsx` with `Inter` and `Oswald`:
-```ts
-import { Inter, Oswald } from "next/font/google";
-
-const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
-const oswald = Oswald({ variable: "--font-oswald", subsets: ["latin"] });
-```
-Apply both to the `<html>` element and set Inter as the base body font in `globals.css`:
-```css
-body {
-  font-family: var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif;
-}
-```
-
-**Never use Geist, Geist Mono, or any font not listed above.**
-
-### 5e. Create the mock data file
-Create `lib/mockData.ts` with a placeholder — fill it in properly during the build tasks.
-
-### 5f. Start the dev server
-```bash
-npm run dev
-```
+(Or another static server the environment supports.)
 
 Tell the designer:
-> "Setup is done and the dev server is running at http://localhost:3000. Starting Task 1 now."
+
+> "Setup is done — open the URL shown in the terminal (often http://localhost:3000). Starting Task 1 now."
 
 ---
 
@@ -155,7 +146,7 @@ Tell the designer:
 Follow `.cursor/templates/3. process-task-list.md` for the full task execution protocol. Key rules:
 
 - Before starting, read the saved PRD and task list files — use them as the source of truth throughout the build, not the conversation history
-- All active Cursor rules apply as normal during the build (design tokens, fonts, mock data conventions, prototype scope, etc.)
+- All active Cursor rules apply as normal during the build (design-system guidance, fonts, mock data conventions, prototype scope, etc.)
 - Work through tasks one at a time
 - After each **parent task** completes, check the browser and report back:
   > "Task [n] is done — here's what was built: [short summary]. Want a quick review before I move on, or shall I go straight to Task [n+1]?"
@@ -181,7 +172,6 @@ When all tasks in the task list are complete, say:
 - Never ask the designer to open a terminal
 - Run all commands yourself
 - If a command fails, fix it and retry silently before telling the user
-- If `design-tokens.all.css` is not found at the expected path, tell the user and ask them to confirm the template root location
 - From Step 4 onwards, always read the saved PRD and task list files at the start of each step — never rely on conversation history as the source of requirements
 - All `.cursor/rules/` apply throughout the entire flow — this workflow does not override them, it sequences them
 - Refer to `prototype-scope.mdc` throughout for what to build and what to skip

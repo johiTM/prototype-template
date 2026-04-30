@@ -20,7 +20,7 @@ When the user says anything like "I want to make a prototype", "start a prototyp
 2. **Figma** — if a link was provided, inspect it with the Figma MCP and summarise findings before writing anything
 3. **PRD** — write the PRD using `.cursor/templates/1. create-prd.md`, get explicit designer approval before continuing
 4. **Task list** — generate it using `.cursor/templates/2. generate-tasks.md`, get explicit designer approval before continuing
-5. **Setup** — only after approval: create the Next.js app, install Shadcn, import tokens, set up fonts, start dev server
+5. **Setup** — only after approval: ensure the static HTML/CSS/JS layout exists, fonts are linked, mock data file present, start a local static server
 6. **Build** — work through the task list one task at a time using `.cursor/templates/3. process-task-list.md`, check in after each parent task
 7. **Wrap-up** — offer to deploy to Vercel or continue tweaking
 
@@ -32,117 +32,45 @@ When the user says anything like "I want to make a prototype", "start a prototyp
 
 | Decision | Chosen |
 |---|---|
-| Framework | Next.js (App Router) |
-| Styling | Tailwind CSS |
-| Components | Shadcn/ui styled with TDS4 tokens |
-| Language | TypeScript (relaxed — `any` is fine, skip types where they slow you down) |
+| Markup | HTML5 |
+| Styling | CSS (plain — files under `css/`) |
+| Behaviour | JavaScript (ES modules — files under `js/`) |
 | Database | None by default — mock data only |
-| Deployment | Vercel |
+| Deployment | Vercel (static site) |
 
 **Key conventions**
 
-- Components: PascalCase → `ScoreCard.tsx`
-- Pages: lowercase → `page.tsx` (Next.js convention)
-- Utilities: camelCase → `formatScore.ts`
-- Mock data: `lib/mockData.ts`
-- Use `any` freely — don't waste time on perfect types
+- Entry HTML: `index.html` at project root
+- Styles: `css/*.css` — use variables in `:root` for brand-aligned colours (see `.cursor/rules/design-system.mdc`)
+- Scripts: `js/*.js` — `type="module"` for imports between files
+- Mock data: `js/mockData.js` (or split into `js/data/*.js` if it grows)
+- No React, no Tailwind, no build step required for the default flow
 
 ---
 
-## Design System — Trackman Design System (TDS4)
+## Design System — Trackman (TDS4)
 
-**IMPORTANT:** Design tokens live in `design-tokens.all.css` at the project root. Read this file before generating any CSS or component styling.
+High-level guidance lives in `.cursor/rules/design-system.mdc`. This template does **not** include a full `design-tokens.all.css` file — stay on-brand using Figma, designer input, and sensible semantic CSS variables (orange accent, off-white page background, etc.).
 
-Import it in `globals.css`:
-```css
-@import "../design-tokens.all.css";
-```
-
-The file includes light mode (`:root`), dark mode (`[data-mode="dark"]`), and system-preference support (`@media (prefers-color-scheme: dark)`).
-
-### Token naming
-
-All tokens follow: `--tds-{category}-{subcategory}-{variant}`
-
-| Category | What it covers |
-|---|---|
-| `color-surface-*` | Backgrounds — elevations, brand, danger, selected, neutral, inverse, disabled |
-| `color-content-*` | Text and icon colours |
-| `color-stroke-*` | Borders, focus rings, dividers |
-| `color-data-*` | Data visualisation — categorical, diverging, optimizer |
-| `color-arbitrary-*` | Decorative palette with shades 1–4 |
-| `spacing-*` | Spacing scale (xs → 11xl) and semantic spacing tokens |
-| `radius-*` | Border radii — scale and semantic tokens |
-| `text-style-*` | Font shorthand — label, body, heading, display sizes |
-| `stroke-weight-*` | Border widths |
-| `window-size-*` | Breakpoints (sm → 2xl) |
-| `opacity-*` | Disabled and loading opacity |
-
-### Most-used tokens
-
-| Purpose | Token | Light value |
-|---|---|---|
-| Page background | `--tds-color-surface-elevation-0-default` | #f6f6f6 |
-| Card / panel background | `--tds-color-surface-elevation-1-default` | #ffffff |
-| Modal / dropdown background | `--tds-color-surface-elevation-2-default` | #ffffff |
-| Brand surface | `--tds-color-surface-brand-default` | #ec691a |
-| Danger surface | `--tds-color-surface-danger-default` | #d4001c |
-| Primary text | `--tds-color-content-primary` | #1f1f1f |
-| Secondary text | `--tds-color-content-secondary` | #5c5c5c |
-| Helper text | `--tds-color-content-helper` | #818181 |
-| Text on colour | `--tds-color-content-on-color` | #ffffff |
-| Subtle border | `--tds-color-stroke-subtle` | #1919191f |
-| Focus ring | `--tds-color-stroke-focus` | #ec691a |
-
-### Design token rules
-
-- Always use CSS variables — never hardcode hex values
-- The brand colour is orange (`#ec691a`) — not blue, not grey
-- Page background is `--tds-color-surface-elevation-0-default` (#f6f6f6) — never plain white
-- Cards and panels sit on `--tds-color-surface-elevation-1-default` (#ffffff)
-- Modals and dropdowns use `--tds-color-surface-elevation-2-default` (#ffffff)
-- For data visualisation, always use categorical colours in order (1→8)
-- Positive = green, Negative = red, Neutral = yellow — always
-
-### Mapping Figma values to TDS tokens
-
-Figma Inspect shows raw values (hex, px, font sizes). These must be translated to TDS tokens, not pasted in as-is.
-
-- Colours: match the Figma hex to the nearest token in `design-tokens.all.css`. If the hex does not match any token, do not invent a new colour — flag it to the designer and ask which token to use.
-- Spacing and radius: round to the nearest `--tds-spacing-*` / `--tds-radius-*` step. If a Figma value is more than one step away from the nearest token, flag it rather than approximating silently.
-- Typography: map to the nearest `--tds-text-style-*` shorthand. Do not compose ad-hoc font-size / line-height pairs if a text style already covers it.
-- If Figma specs a value that has no reasonable token equivalent, stop and ask the designer — do not hardcode and do not guess.
-
-### TDS4 fonts
-
-TDS4 uses three typefaces. Always load these — never use the Next.js default Geist fonts.
+### Fonts
 
 | Role | Font | Used for |
 |---|---|---|
-| Body & labels | `Inter` | All body text, labels, UI copy |
-| Headings | `Inter` | Headings |
-| Display | `Oswald` | Large display text, scores, stats |
+| Body & labels | Inter | UI copy, labels |
+| Display | Oswald | Large scores, stats, display headings |
 
-**Setup in `app/layout.tsx`:**
-```ts
-import { Inter, Oswald } from "next/font/google";
+Load via Google Fonts in `index.html` (see the starter file). Do not rely on system defaults alone for final polish.
 
-const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
-const oswald = Oswald({ variable: "--font-oswald", subsets: ["latin"] });
-```
+### Visual rules
 
-Apply both variables to the `<html>` element and set Inter as the base body font in `globals.css`:
-```css
-body {
-  font-family: var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif;
-}
-```
+- Brand colour is orange (`#ec691a`) — not blue as the primary accent
+- Page background should feel like Trackman product chrome (typically light grey `#f6f6f6`), not stark white full-bleed unless the frame says so
+- For data visualisation: positive = green, negative = red, neutral = yellow — when showing charts or deltas
 
-**Do NOT** use Geist, Geist Mono, or any other font not listed above.
+### Mapping Figma to CSS
 
-### TDS4 components
-
-TDS4 React components are in progress. For now, use Shadcn/ui for all components. Apply TDS4 tokens to override Shadcn defaults so prototypes look on-brand.
+- Translate Figma spacing and type to consistent steps in your CSS — round to a simple scale (e.g. 4px or 8px base) and align with designer expectations
+- If a colour in Figma does not match an agreed brand value, ask the designer rather than guessing
 
 ---
 
@@ -175,8 +103,9 @@ If it doesn't help test the idea — skip it.
 ### Complexity check
 
 If you're about to suggest any of the following unprompted — stop and ask whether it's needed:
+
 - Setting up authentication or user sessions
-- Complex state management (Redux, Zustand)
+- Heavy frameworks (React, Vue, Svelte) unless the user asks
 - API integrations beyond what's being tested
 - Database setup
 - Abstracting components into a shared library
@@ -185,7 +114,7 @@ If you're about to suggest any of the following unprompted — stop and ask whet
 
 ## Mock Data
 
-- Keep mock data in `lib/mockData.ts`
+- Keep mock data in `js/mockData.js` (or imported modules)
 - Use realistic Trackman values: distances in yards, speeds in mph, real-sounding player names
 - Make it realistic — a designer showing this to a PO or user should not have to say "ignore the dummy data"
 
@@ -195,15 +124,13 @@ If you're about to suggest any of the following unprompted — stop and ask whet
 
 ```
 my-prototype/
-  app/
-    layout.tsx        ← global layout, import TDS4 tokens here
-    page.tsx          ← entry point
-    [feature]/
-      page.tsx
-  components/         ← prototype-specific components
-  lib/
-    mockData.ts       ← all mock data goes here
-  public/             ← static assets
+  index.html          ← entry point
+  css/
+    styles.css        ← global styles, CSS variables
+  js/
+    main.js           ← bootstraps the UI
+    mockData.js       ← mock data
+  public/             ← optional static assets (images, etc.)
 ```
 
 ---
@@ -212,16 +139,16 @@ my-prototype/
 
 When the user asks to deploy, publish, or share the prototype:
 
-1. Run `npm run build` first — fix any build errors before deploying
+1. Static HTML prototypes do not require `npm run build`. Confirm `index.html` is at the project root and paths to CSS/JS/assets resolve.
 2. Check whether a `.vercel` folder exists in the project root:
    - **Yes** → project is already linked. Run: `npx vercel --prod`
-   - **No** → first deploy. Run: `npx vercel` and follow the prompts (a browser window will open for login)
+   - **No** → first deploy. Run: `npx vercel` from the project root and follow the prompts (a browser window may open for login)
 3. Confirm the production URL and share it with the user
 
 **Rules:**
-- Always run `npm run build` before deploying
-- Environment variables from `.env.local` are not deployed automatically — remind the user to add them in the Vercel dashboard under Project Settings → Environment Variables
-- The entry point must be `app/page.tsx` (Next.js App Router convention)
+
+- Entry point for the site is `index.html`
+- If you add a backend or tooling that uses env vars, remind the user to configure them in the Vercel dashboard — static prototypes often have no secrets
 
 ---
 
@@ -229,15 +156,7 @@ When the user asks to deploy, publish, or share the prototype:
 
 Only set up Supabase when the user explicitly asks for a backend, real data, or persistence. Mock data is the default.
 
-If requested:
-1. Ask: "What data does this prototype need to store?" and "Do multiple users need to interact with the same data?"
-2. Install: `npm install @supabase/supabase-js`
-3. Create `lib/supabase.ts` with the Supabase client
-4. Add credentials to `.env.local` (never commit this file)
-5. Disable RLS — not needed for prototypes
-6. Use realistic Trackman seed data (distances in yards, speeds in mph, real-sounding names)
-
-Direct the user to https://supabase.com to create a free project. Use West EU (Ireland) as the region.
+If requested, follow `.cursor/rules/supabase.mdc`.
 
 ---
 
@@ -246,6 +165,7 @@ Direct the user to https://supabase.com to create a free project. Use West EU (I
 > **Replace this section with context specific to what you're building.**
 
 Add here:
+
 - What the product does and who it's for
 - Key user types and their goals
 - Terminology specific to this product area

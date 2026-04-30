@@ -7,34 +7,33 @@ This folder contains `.mdc` rule files that guide Cursor's behaviour when workin
 ## Files
 
 ### `prototype-workflow.mdc`
-Triggered when the user says anything like "I want to make a prototype" or "Start a prototype". Drives the full setup flow — asks two questions, then runs create-next-app, Shadcn install, token import, and dev server automatically. No terminal required from the designer.
+
+Triggered when the user says anything like "I want to make a prototype" or "Start a prototype". Drives the full workflow — discovery, PRD, task list, then static site setup and build. The designer does not need to use the terminal themselves.
 
 ---
 
 ### `stack.mdc`
+
 Defines the core technology stack and project conventions.
 
-- **Framework:** Next.js (App Router)
-- **Styling:** Tailwind CSS
-- **Components:** Shadcn/ui (with TDS4 tokens applied)
-- **Language:** TypeScript (relaxed — `any` is acceptable, skip types where they slow you down)
+- **Markup:** HTML5
+- **Styling:** Plain CSS under `css/`
+- **Behaviour:** JavaScript ES modules under `js/`
 - **Database:** None by default — mock data only
-- **Deployment:** Vercel
+- **Deployment:** Vercel (static)
 
-Also covers project structure, file naming conventions, mock data rules, what to skip in prototypes, common commands, and tone of voice.
+Also covers project structure, file naming, mock data rules, what to skip in prototypes, common commands, and tone of voice.
 
 ---
 
 ### `design-system.mdc`
-Covers the Trackman Design System (TDS4) and how to apply it to prototypes.
 
-- TDS4 React components are not yet available — use Shadcn/ui styled with TDS4 tokens
-- Contains all CSS custom properties (brand colours, surfaces, content, strokes, data visualisation)
-- Rules: always use CSS variables, never hardcode hex values, brand colour is orange (`#ec691a`), page background is `#f6f6f6`
+Lightweight notes on Trackman Design System (TDS4) alignment for static prototypes. This template does not ship a full token CSS file — use Figma and designer handoff for fidelity.
 
 ---
 
 ### `prototype-scope.mdc`
+
 Sets expectations for what a prototype should and shouldn't include.
 
 - Build the happy path only with realistic mock data
@@ -45,25 +44,28 @@ Sets expectations for what a prototype should and shouldn't include.
 ---
 
 ### `deploy.mdc`
-Handles deployment to Vercel.
 
-- Deploy using `bash vercel-deploy-kit/deploy.sh` from the project root
-- First deploy requires a browser login; subsequent deploys go straight to production
+Handles deployment to Vercel for static HTML/CSS/JS.
+
+- Default stack has no build step — deploy from project root with `index.html` as entry
+- First deploy may require a browser login; subsequent deploys can use `npx vercel --prod`
 - Check for a `.vercel` folder to determine if a project has been deployed before
 
 ---
 
 ### `supabase.mdc`
+
 Optional backend setup using Supabase. Only activated when explicitly requested.
 
-- Walks through installing `@supabase/supabase-js`, creating the client, and adding environment variables
+- Walks through adding Supabase to a static or lightly tool-assisted setup
 - RLS is disabled for prototypes
-- Credentials go in `.env.local` (never committed)
+- Credentials must not be committed
 - Seed data should use realistic Trackman values
 
 ---
 
 ### `product.mdc`
+
 Provides business, product, and team context for the project. This file is meant to be replaced with your own product context so Cursor understands what you're building and who it's for.
 
 - Company and product background

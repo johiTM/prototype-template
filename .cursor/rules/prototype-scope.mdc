@@ -33,16 +33,16 @@ If it doesn't help test the idea — skip it.
 ## Trackman Look & Feel
 Prototypes should look like Trackman products, not generic AI output.
 
-- Always use TDS4 tokens for colours (see designsystem.mdc)
-- Background: `--tds-color-surface-elevation-0-default` (#f6f6f6) — never plain white
-- Brand colour is orange (`--tds-color-surface-brand-default`) — not blue, not grey
-- Data visualisation: use categorical colours in order, positive = green, negative = red
+- Use CSS variables or consistent semantic colours aligned with TDS (see design-system.mdc)
+- Page background should read as product chrome (typically light grey ~#f6f6f6), not a flat white void unless the frame specifies it
+- Brand accent is orange (~#ec691a) — not blue as the primary brand colour
+- Data visualisation: positive = green, negative = red, neutral = yellow where relevant
 - Use realistic Trackman data — distances in yards, speeds in mph, real-sounding player names
 
 ---
 
 ## Mock Data Rules
-- Keep mock data in `lib/mockData.ts`
+- Keep mock data in `js/mockData.js` (or dedicated modules under `js/`)
 - Make it realistic — a designer showing this to a PO or user should not have to say "ignore the dummy data"
 - Trackman context: golf shots, ball speed, launch angle, carry distance, player profiles, session data
 
@@ -53,7 +53,7 @@ If Cursor suggests any of the following unprompted — stop and question whether
 - Setting up authentication or user sessions
 - Complex state management (Redux, Zustand)
 - API integrations beyond what's being tested
-- Database setup (if you need a backend, ask explicitly and follow `docs/5-setup-supabase.md`)
+- Database setup (if you need a backend, ask explicitly and follow `supabase.mdc`)
 - Abstracting components into a shared library
 
 ---

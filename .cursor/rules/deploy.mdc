@@ -1,6 +1,6 @@
 # Cursor Rules — Vercel Deployment
 
-Prototypes deploy to Vercel using the Vercel CLI. Always use `npx vercel` for deployment tasks.
+Prototypes are **static sites** (HTML/CSS/JS). Deploy to Vercel using the Vercel CLI. Always use `npx vercel` for deployment tasks.
 
 ---
 
@@ -8,10 +8,13 @@ Prototypes deploy to Vercel using the Vercel CLI. Always use `npx vercel` for de
 
 When the user asks to deploy, publish, push changes, or share the prototype:
 
-1. Run `npm run build` first to catch any build errors
-2. Then run `npx vercel` from the project root
-3. On first run: follow the prompts to link or create a Vercel project (a browser window will open for login)
-4. Confirm the production URL once complete and share it with the user
+1. Confirm the site runs locally from a static server — `index.html` at the project root, asset paths correct
+2. There is **no** `npm run build` step for the default stack; if the project has no build pipeline, skip straight to deploy
+3. Run `npx vercel` from the project root
+4. On first run: follow the prompts to link or create a Vercel project (a browser window may open for login)
+5. Confirm the production URL once complete and share it with the user
+
+If the user adds a bundler or framework later and `npm run build` exists, run that first and fix errors before deploying.
 
 ---
 
@@ -30,6 +33,7 @@ No prompts — goes straight to production.
 ## Checking deployment status
 
 When the user asks if the project is deployed or live:
+
 - Check whether a `.vercel` folder exists in the project root
 - If yes: project is linked and has been deployed before
 - If no: project has not been set up with Vercel yet
@@ -38,7 +42,6 @@ When the user asks if the project is deployed or live:
 
 ## Key rules
 
-- Always run `npm run build` before deploying — fix any build errors first
-- The entry point must be `app/page.tsx` (Next.js App Router convention)
-- Environment variables (`.env.local`) are not deployed automatically — remind the user to add them in the Vercel dashboard under Project Settings → Environment Variables
-- Never ask the user to open a terminal themselves — walk them through the commands step by step
+- Entry point for visitors is **`index.html`** at the project root
+- Environment variables are only relevant if the project uses serverless functions or a build that injects env — remind the user to add secrets in the Vercel dashboard when applicable
+- Never ask the user to open a terminal themselves — run commands for them

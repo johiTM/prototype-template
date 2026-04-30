@@ -1,97 +1,11 @@
 # Trackman Design System (TDS4)
 
-## Status
-TDS4 React components are in progress. For now, use Shadcn/ui for all components.
-Apply TDS4 tokens (colours, surfaces, typography) to override Shadcn defaults so prototypes look on-brand.
+This template does **not** ship a token CSS file. TDS4 is Trackman’s design system: colours, typography, spacing, and components are defined in **Figma and internal design-system sources**, not in this repo.
 
----
+When styling prototypes:
 
-## TDS4 Components (coming soon)
-The following components will be available once TDS4 publishes as an npm package:
-- Button
-- Checkbox
-- TextField
-- ...
+- Aim for an **on-brand Trackman look**: orange brand accent (`#ec691a`), off-white page background (`#f6f6f6`), cards on white — not generic grey UI or default browser styling.
+- Prefer **semantic CSS** (`--brand`, `--surface-page`, etc.) in your own `css/` files if that keeps things consistent; align names with TDS concepts (surface elevation, content primary/secondary, stroke) when possible.
+- **Do not** paste large vendor token files into the template. If you need the official `--tds-*` variable set, pull it from your team’s current TDS package or design handoff — do not reproduce it here.
 
-Until then, use Shadcn/ui equivalents styled with TDS4 tokens below.
-
----
-
-## Design Tokens
-
-**IMPORTANT:** The complete token list lives in `design-tokens.all.css` at the project root.
-ALWAYS read this file before generating any CSS, Tailwind classes, or component styling code.
-Import it in `globals.css` at the top of every prototype:
-
-```css
-@import "../design-tokens.all.css";
-```
-
-The file includes light mode (`:root`), dark mode (`[data-mode="dark"]`), and system-preference support (`@media (prefers-color-scheme: dark)`).
-
----
-
-## Token Naming Convention
-
-All tokens follow: `--tds-{category}-{subcategory}-{variant}`
-
-| Category | What it covers | Examples |
-|---|---|---|
-| `color-surface-*` | Backgrounds — elevations, brand, danger, selected, neutral, inverse, disabled | `--tds-color-surface-elevation-0-default`, `--tds-color-surface-brand-default` |
-| `color-content-*` | Text and icon colours | `--tds-color-content-primary`, `--tds-color-content-error` |
-| `color-stroke-*` | Borders, focus rings, dividers | `--tds-color-stroke-subtle`, `--tds-color-stroke-focus` |
-| `color-data-*` | Data visualisation — categorical, diverging, optimizer | `--tds-color-data-categorial-1`, `--tds-color-data-diverging-positive-plain` |
-| `color-arbitrary-*` | Decorative palette (blue, teal, green, yellow, orange, red, magenta, lime, purple, cyan, neutral) with shades 1–4 | `--tds-color-arbitrary-blue-3` |
-| `spacing-*` | Spacing scale (xs → 11xl) and semantic spacing tokens | `--tds-spacing-lg`, `--tds-spacing-vertical-between-sections` |
-| `radius-*` | Border radii — scale (xs → full) and semantic tokens | `--tds-radius-sm`, `--tds-radius-cards-lg` |
-| `text-style-*` | Font shorthand — label, body, heading, display sizes | `--tds-text-style-heading-md`, `--tds-text-style-body-sm` |
-| `stroke-weight-*` | Border widths — standard, highlight, module | `--tds-stroke-weight-standard` |
-| `window-size-*` | Breakpoints (sm → 2xl) | `--tds-window-size-md` |
-| `opacity-*` | Disabled and loading opacity | `--tds-opacity-disabled` |
-
----
-
-## Quick Reference — Most-Used Tokens
-
-These are the tokens you'll reach for most often. For the full set, read `design-tokens.all.css`.
-
-| Purpose | Token | Light value |
-|---|---|---|
-| Page background | `--tds-color-surface-elevation-0-default` | #f6f6f6 |
-| Card / panel background | `--tds-color-surface-elevation-1-default` | #ffffff |
-| Modal / dropdown background | `--tds-color-surface-elevation-2-default` | #ffffff |
-| Brand surface | `--tds-color-surface-brand-default` | #ec691a |
-| Danger surface | `--tds-color-surface-danger-default` | #d4001c |
-| Inverse surface | `--tds-color-surface-inverse-default` | #1f1f1f |
-| Primary text | `--tds-color-content-primary` | #1f1f1f |
-| Secondary text | `--tds-color-content-secondary` | #5c5c5c |
-| Helper text | `--tds-color-content-helper` | #818181 |
-| Text on colour | `--tds-color-content-on-color` | #ffffff |
-| Error text | `--tds-color-content-error` | #d4001c |
-| Subtle border | `--tds-color-stroke-subtle` | #1919191f |
-| Strong border | `--tds-color-stroke-strong` | #1919194d |
-| Focus ring | `--tds-color-stroke-focus` | #ec691a |
-
----
-
-## Rules
-
-- Always use CSS variables — never hardcode hex values
-- The brand colour is orange (`#ec691a`) — not blue, not grey
-- Page background is `--tds-color-surface-elevation-0-default` (#f6f6f6)
-- Cards and panels sit on `--tds-color-surface-elevation-1-default` (#ffffff)
-- Modals and dropdowns use `--tds-color-surface-elevation-2-default` (#ffffff)
-- For data visualisation, always use categorical colours in order (1→8)
-- Positive = green, Negative = red, Neutral = yellow — always
-- For spacing, radius, typography, and the full colour palette — read `design-tokens.all.css`
-
----
-
-## Mapping Figma values to TDS tokens
-
-Figma Inspect shows raw values (hex, px, font sizes). These must be translated to TDS tokens, not pasted in as-is.
-
-- Colours: match the Figma hex to the nearest token in `design-tokens.all.css`. If the hex does not match any token, do not invent a new colour — flag it to the designer and ask which token to use (or whether to add one).
-- Spacing and radius: round to the nearest `--tds-spacing-*` / `--tds-radius-*` step. If a Figma value is more than one step away from the nearest token, flag it rather than approximating silently.
-- Typography: map to the nearest `--tds-text-style-*` shorthand. Do not compose ad-hoc font-size / line-height pairs if a text style already covers it.
-- If Figma specs a value that has no reasonable token equivalent, stop and ask the designer — do not hardcode and do not guess.
+For Figma-to-build fidelity, use **Figma inspect + designer agreement** on colours and type; this rule file is only a lightweight reminder, not a token dictionary.

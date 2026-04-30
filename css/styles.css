@@ -1,0 +1,30 @@
+/* Use semantic variables aligned with TDS where helpful; see .cursor/rules/design-system.mdc */
+
+:root {
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Oswald", var(--font-body);
+  --surface-page: #f6f6f6;
+  --surface-card: #ffffff;
+  --content-primary: #1f1f1f;
+  --brand: #ec691a;
+  --content-secondary: #5c5c5c;
+}
+
+.helper-text {
+  color: var(--content-secondary);
+  font-size: 0.875rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--content-primary);
+  background: var(--surface-page);
+}
