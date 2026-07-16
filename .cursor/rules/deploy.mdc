@@ -30,6 +30,58 @@ No prompts — goes straight to production.
 
 ---
 
+## Password protection
+
+Prototypes use Edge Middleware + a `PROTO_PASSWORD` env var (Vercel Hobby has no native password protection).
+
+### First deploy of a new prototype
+
+1. Create `middleware.js` in the project root with this exact content:
+
+```js
+export const config = { matcher: '/((?!_next|favicon.ico).*)' };
+
+export default function middleware(request) {
+  const url = new URL(request.url);
+  const cookie = request.headers.get('cookie') || '';
+  const hasAuth = cookie.includes(`proto_auth=${process.env.PROTO_PASSWORD}`);
+
+  if (hasAuth) return;
+
+  const pw = url.searchParams.get('pw');
+  if (pw === process.env.PROTO_PASSWORD) {
+    url.searchParams.delete('pw');
+    const res = Response.redirect(url.toString(), 302);
+    res.headers.append('Set-Cookie', `proto_auth=${pw}; Path=/; Max-Age=2592000; HttpOnly; Secure; SameSite=Lax`);
+    return res;
+  }
+
+  return new Response('Password required. Add ?pw=yourpassword to the URL.', { status: 401 });
+}
+```
+
+2. Create or update `vercel.json` with this exact content:
+
+```json
+{
+  "functions": {
+    "middleware.js": {
+      "runtime": "edge"
+    }
+  }
+}
+```
+
+3. Prompt the designer for a password, then run `vercel env add PROTO_PASSWORD` and set it (must be added **before** the first deploy so middleware can read it)
+4. Deploy as normal
+5. Return the share link as `https://[url]?pw=[password]`
+
+### Subsequent deploys of an already-protected prototype
+
+Skip steps 1–3 — `middleware.js`, `vercel.json`, and `PROTO_PASSWORD` already exist. Deploy normally and remind the designer that the link still needs `?pw=` on first visit per browser.
+
+---
+
 ## Checking deployment status
 
 When the user asks if the project is deployed or live:
