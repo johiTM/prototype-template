@@ -149,12 +149,13 @@ STOP — do not run npx vercel yet.
 
 1. Confirm `index.html` at project root (no `npm run build` for the default stack)
 2. Run: `test -f middleware.js && test -f vercel.json && echo "protection files OK" || echo "MISSING protection files — stop"`
-3. If missing: create `middleware.js` and `vercel.json` from the snippets in `.cursor/rules/deploy.mdc`
-4. If `PROTO_PASSWORD` is not set: ask the designer for a password, then run `vercel env add PROTO_PASSWORD` (**before** deploy)
-5. Only now deploy: `.vercel` exists → `npx vercel --prod`; else → `npx vercel` (link project)
-6. Share **`https://[url]?pw=[password]`** — never a bare production URL
+3. If missing: create `middleware.js` and `vercel.json` from the snippets in `.cursor/rules/deploy.mdc` (`vercel.json` is `{}` — do not configure middleware under `functions` / `runtime`)
+4. Ensure `package.json` includes `@vercel/edge` (create/merge from `.cursor/rules/deploy.mdc`)
+5. If `PROTO_PASSWORD` is not set: ask the designer for a password, then run `vercel env add PROTO_PASSWORD` (**before** deploy)
+6. Only now deploy: `.vercel` exists → `npx vercel --prod`; else → `npx vercel` (link project)
+7. Share **`https://[url]?pw=[password]`** — never a bare production URL
 
-Skipping steps 2–4 is a failure. Full snippets and anti-patterns live in `.cursor/rules/deploy.mdc`.
+Skipping steps 2–5 is a failure. Full snippets and anti-patterns live in `.cursor/rules/deploy.mdc`.
 
 ---
 

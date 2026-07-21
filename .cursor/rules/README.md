@@ -47,8 +47,8 @@ Sets expectations for what a prototype should and shouldn't include.
 
 **Always applied.** Handles Vercel deploys for static HTML/CSS/JS. Password protection is a hard gate.
 
-- Do not run `npx vercel` until `middleware.js`, `vercel.json`, and `PROTO_PASSWORD` exist
-- Preflight check required before every deploy
+- Do not run `npx vercel` until `middleware.js`, `vercel.json`, `package.json` (`@vercel/edge`), and `PROTO_PASSWORD` exist
+- Preflight check required before every deploy; `vercel.json` is `{}` (root middleware is automatic — no `functions`/`runtime` block)
 - Share links must include `?pw=` — never bare production URLs
 - First deploy may require browser login; subsequent deploys use `npx vercel --prod`
 - Deploy/config files are hidden from the explorer via `.vscode/settings.json` — still create them; designers should not need to see them
