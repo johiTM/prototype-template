@@ -22,7 +22,7 @@ When the user says anything like "I want to make a prototype", "start a prototyp
 4. **Task list** — generate it using `.cursor/templates/2. generate-tasks.md`, get explicit designer approval before continuing
 5. **Setup** — only after approval: ensure the static HTML/CSS/JS layout exists, fonts are linked, mock data file present, start a local static server
 6. **Build** — work through the task list one task at a time using `.cursor/templates/3. process-task-list.md`, check in after each parent task
-7. **Wrap-up** — offer to deploy to Vercel or continue tweaking
+7. **Wrap-up** — offer to deploy to Vercel or continue tweaking (deploy via `.cursor/rules/deploy.mdc` — password gate required before `npx vercel`)
 
 **Do not run any commands or write any code until Steps 1–4 are complete and approved.**
 
@@ -137,18 +137,24 @@ my-prototype/
 
 ## Deployment
 
-When the user asks to deploy, publish, or share the prototype:
+**Follow `.cursor/rules/deploy.mdc` exactly.** That rule is always applied.
 
-1. Static HTML prototypes do not require `npm run build`. Confirm `index.html` is at the project root and paths to CSS/JS/assets resolve.
-2. Check whether a `.vercel` folder exists in the project root:
-   - **Yes** → project is already linked. Run: `npx vercel --prod`
-   - **No** → first deploy. Run: `npx vercel` from the project root and follow the prompts (a browser window may open for login)
-3. Confirm the production URL and share it with the user
+When the user says deploy / publish / share / go live:
 
-**Rules:**
+```
+STOP — do not run npx vercel yet.
+```
 
-- Entry point for the site is `index.html`
-- If you add a backend or tooling that uses env vars, remind the user to configure them in the Vercel dashboard — static prototypes often have no secrets
+**Required order (no skipping):**
+
+1. Confirm `index.html` at project root (no `npm run build` for the default stack)
+2. Run: `test -f middleware.js && test -f vercel.json && echo "protection files OK" || echo "MISSING protection files — stop"`
+3. If missing: create `middleware.js` and `vercel.json` from the snippets in `.cursor/rules/deploy.mdc`
+4. If `PROTO_PASSWORD` is not set: ask the designer for a password, then run `vercel env add PROTO_PASSWORD` (**before** deploy)
+5. Only now deploy: `.vercel` exists → `npx vercel --prod`; else → `npx vercel` (link project)
+6. Share **`https://[url]?pw=[password]`** — never a bare production URL
+
+Skipping steps 2–4 is a failure. Full snippets and anti-patterns live in `.cursor/rules/deploy.mdc`.
 
 ---
 
@@ -190,4 +196,4 @@ Without this, output will be generic. The more context, the better the output.
 - A user can click through the relevant flow
 - It looks like a Trackman product
 - It uses realistic data
-- It can be deployed to Vercel and shared via a link
+- It can be deployed to Vercel and shared via a password-protected link (`?pw=`)

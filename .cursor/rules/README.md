@@ -45,11 +45,13 @@ Sets expectations for what a prototype should and shouldn't include.
 
 ### `deploy.mdc`
 
-Handles deployment to Vercel for static HTML/CSS/JS.
+**Always applied.** Handles Vercel deploys for static HTML/CSS/JS. Password protection is a hard gate.
 
-- Default stack has no build step — deploy from project root with `index.html` as entry
-- First deploy may require a browser login; subsequent deploys can use `npx vercel --prod`
-- Check for a `.vercel` folder to determine if a project has been deployed before
+- Do not run `npx vercel` until `middleware.js`, `vercel.json`, and `PROTO_PASSWORD` exist
+- Preflight check required before every deploy
+- Share links must include `?pw=` — never bare production URLs
+- First deploy may require browser login; subsequent deploys use `npx vercel --prod`
+- Deploy/config files are hidden from the explorer via `.vscode/settings.json` — still create them; designers should not need to see them
 
 ---
 
