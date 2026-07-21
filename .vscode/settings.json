@@ -6,6 +6,7 @@
     "package-lock.json": true,
     ".vercel": true,
     ".gitignore": true,
-    "CLAUDE.md": true
+    "CLAUDE.md": true,
+    ".vscode": true
   }
 }
