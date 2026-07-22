@@ -22,7 +22,7 @@ When the user says anything like "I want to make a prototype", "start a prototyp
 4. **Task list** — generate it using `.cursor/templates/2. generate-tasks.md`, get explicit designer approval before continuing
 5. **Setup** — only after approval: ensure the static HTML/CSS/JS layout exists, fonts are linked, mock data file present, start a local static server
 6. **Build** — work through the task list one task at a time using `.cursor/templates/3. process-task-list.md`, check in after each parent task
-7. **Wrap-up** — offer to deploy to Vercel or continue tweaking (deploy via `.cursor/rules/deploy.mdc` — password gate required before `npx vercel`)
+7. **Wrap-up** — offer to deploy to Vercel, continue tweaking, or write the product handoff doc (deploy via `.cursor/rules/deploy.mdc` — password gate required before `npx vercel`; handoff via `.cursor/rules/handoff.mdc`)
 
 **Do not run any commands or write any code until Steps 1–4 are complete and approved.**
 
@@ -156,6 +156,21 @@ STOP — do not run npx vercel yet.
 7. Share **`https://[url]?pw=[password]`** — never a bare production URL
 
 Skipping steps 2–5 is a failure. Full snippets and anti-patterns live in `.cursor/rules/deploy.mdc`.
+
+---
+
+## Handoff documentation
+
+A product-first document so product can review the prototype and write user stories. Not a second PRD.
+
+When the user says "create the handoff documentation", "update the handoff documentation", or picks "handoff" at wrap-up:
+
+1. Follow `.cursor/rules/handoff.mdc` and `.cursor/templates/5. create-handoff.md`
+2. Requires a PRD in `.cursor/documents/prds/` — if none exists, one is needed first
+3. Read the PRD, task list, and prototype; fill everything you can before asking the user anything
+4. Save to `.cursor/documents/handoffs/handoff-[prd-file-name].md`; update in place if it already exists
+
+Covers: learning goal, main user stories, prototype vs product, user paths, edge cases, in / out of scope, open questions and assumptions. Available on demand any time a PRD exists.
 
 ---
 
