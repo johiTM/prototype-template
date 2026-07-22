@@ -11,16 +11,23 @@ alwaysApply: true
 
 **Trigger:** user says "create the handoff documentation", "update the handoff documentation", "write the handoff doc", or similar.
 
-The handoff document is product-first. It exists so product can review the prototype and write user stories. It summarises the main user stories, how the prototype differs from the real product, the user paths, and the edge cases. It is not a second PRD.
+The handoff document is product-first. It exists so product can review the prototype and write user stories from what exists now, not from the original plan. It summarises the main user stories, how the prototype differs from the real product, the user paths, and the edge cases. It is not a second PRD.
+
+## Sources of truth (in order)
+
+1. What was actually built: the prototype code and how it behaves.
+2. Prior chat / Cursor session decisions: deviations, stubs, naming calls, test intent.
+3. PRD and task list: light backup only, to fill gaps or link. Do not restate or mirror them.
 
 ## What to do
 
 1. Follow `.cursor/templates/5. create-handoff.md` exactly.
-2. Requires a PRD to exist in `.cursor/documents/prds/`. If none exists, tell the user a PRD is needed first and stop.
-3. Read the relevant PRD, task list, and the prototype before writing. Fill in everything you can before asking the user anything.
-4. If a handoff file for that PRD already exists in `.cursor/documents/handoffs/`, update it in place. Do not create a duplicate.
-5. Save to `.cursor/documents/handoffs/handoff-[prd-file-name].md`.
-6. After saving, tell the user where it is and ask them to review it.
+2. Read the prototype and prior chat context first. Skim the PRD and task list only to fill gaps or link them. A missing task list is fine.
+3. If more than one PRD exists, ask which one(s) the handoff is for.
+4. Fill in everything you can from the build before asking the user anything.
+5. If a handoff file already exists in `.cursor/documents/handoffs/`, offer to update it in place. Do not create a duplicate.
+6. Save to `.cursor/documents/handoffs/handoff-[prd-file-name].md`.
+7. After saving, tell the user where it is and ask them to review it. If the PRD looks stale against the build, offer to update it.
 
 ## Availability
 
@@ -38,5 +45,5 @@ The handoff document is product-first. It exists so product can review the proto
 ## Do not
 
 - Do not change the prototype. This step only writes documentation.
-- Do not repeat full acceptance criteria or the whole task list. Those live in the PRD and task list.
-- Do not create a handoff before a PRD exists.
+- Do not restate or mirror the PRD or task list. If it reads like a PRD, cut it.
+- Do not edit the PRD, task list, or an existing handoff unprompted. Ask first.
