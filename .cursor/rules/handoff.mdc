@@ -37,6 +37,8 @@ The handoff document is product-first. It exists so product can review the proto
 ## Writing style
 
 - Write for a product manager, not a developer.
+- Use really simple, everyday language. A non-technical reader should understand every line.
+- No technical jargon or developer shorthand. Describe what the user sees and does, not how it is built. Avoid phrases like "not exercised in UI", "tab-local", or "hash deep-links"; say "you cannot do this yet", "only saved on this tab", "links that jump to a screen".
 - Be direct and short. No filler.
 - Do not use em dashes.
 - Do not use words like leverage, robust, seamless, streamline, or elevate.
