@@ -25,9 +25,13 @@ The handoff document is product-first. It exists so product can review the proto
 2. Read the prototype and prior chat context first. Skim the PRD and task list only to fill gaps or link them. A missing task list is fine.
 3. If more than one PRD exists, ask which one(s) the handoff is for.
 4. Fill in everything you can from the build before asking the user anything.
-5. If a handoff file already exists in `.cursor/documents/handoffs/`, offer to update it in place. Do not create a duplicate.
-6. Save to `.cursor/documents/handoffs/handoff-[prd-file-name].md`.
-7. After saving, tell the user where it is and ask them to review it. If the PRD looks stale against the build, offer to update it.
+5. Give the reviewer links they can open: the deployed link (with `?pw=` if it exists), the local entry file, Figma, the PRD, and the task list. Use unchecked task list items to show what is left near the top.
+6. Say how you will know the learning goal worked (the success signals), so product can plan the test and write stories.
+7. Keep build status in the one "What's built" table. Do not repeat it in every section.
+8. Write edge cases as real user-facing situations and what the user sees, not developer notes.
+9. If a handoff file already exists in `.cursor/documents/handoffs/`, offer to update it in place. Do not create a duplicate.
+10. Save to `.cursor/documents/handoffs/handoff-[prd-file-name].md`.
+11. After saving, tell the user where it is and ask them to review it. If the PRD looks stale against the build, offer to update it.
 
 ## Availability
 

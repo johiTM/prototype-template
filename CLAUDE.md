@@ -161,16 +161,17 @@ Skipping steps 2–5 is a failure. Full snippets and anti-patterns live in `.cur
 
 ## Handoff documentation
 
-A product-first document so product can review the prototype and write user stories. Not a second PRD.
+A product-first document so product can review the prototype and write user stories from what exists now. Not a second PRD.
 
 When the user says "create the handoff documentation", "update the handoff documentation", or picks "handoff" at wrap-up:
 
 1. Follow `.cursor/rules/handoff.mdc` and `.cursor/templates/5. create-handoff.md`
-2. Requires a PRD in `.cursor/documents/prds/` — if none exists, one is needed first
-3. Read the PRD, task list, and prototype; fill everything you can before asking the user anything
-4. Save to `.cursor/documents/handoffs/handoff-[prd-file-name].md`; update in place if it already exists
+2. Read the prototype and prior chat first; use the PRD and task list as light backup, not the main source
+3. Fill everything you can from the build before asking the user anything
+4. Give reviewer links up top (deployed `?pw=` link, Figma, PRD, task list) and use unchecked task list items to show what is left
+5. Save to `.cursor/documents/handoffs/handoff-[prd-file-name].md`; update in place if it already exists
 
-Covers: learning goal, main user stories, prototype vs product, user paths, edge cases, in / out of scope, open questions and assumptions. Available on demand any time a PRD exists.
+Covers: learning goal, how we will know it worked, what's built, main user stories, prototype vs product, user paths, edge cases, in / out of scope, open questions and assumptions. Write it in plain, non-technical language with edge cases framed as user situations. Available on demand any time a PRD exists.
 
 ---
 

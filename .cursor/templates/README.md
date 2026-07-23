@@ -8,7 +8,7 @@ This directory contains the step-by-step process for developing features using C
 | `2. generate-tasks.md` | Create a task list from a PRD |
 | `3. process-task-list.md` | Implement tasks and manage progress |
 | `4. code-review.md` | Review code for quality and best practices |
-| `5. create-handoff.md` | Write a product handoff doc from the PRD, task list, and prototype |
+| `5. create-handoff.md` | Write a product handoff doc from the built prototype, with the PRD and task list as light backup |
 
 ## How to Use
 
