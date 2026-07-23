@@ -55,6 +55,19 @@ Sets expectations for what a prototype should and shouldn't include.
 
 ---
 
+### `handoff.mdc`
+
+**Always applied.** Triggered when the user says "create/update the handoff documentation" or picks "handoff" at wrap-up. Follows `.cursor/templates/5. create-handoff.md` to write a product-first handoff doc.
+
+- Product-first: helps product review the prototype and write user stories from what exists now
+- Build-first: reads the prototype and prior chat first; PRD and task list are light backup
+- Plain language, no jargon; edge cases framed as user situations
+- Puts reviewer links up top and states how we will know the learning goal worked
+- Saves to `.cursor/documents/handoffs/handoff-[prd-file-name].md`; updates in place if it exists
+- Available on demand any time, not just at wrap-up
+
+---
+
 ### `supabase.mdc`
 
 Optional backend setup using Supabase. Only activated when explicitly requested.

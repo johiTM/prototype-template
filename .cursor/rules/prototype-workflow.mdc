@@ -164,6 +164,9 @@ When all tasks in the task list are complete, say:
 > **What next?**
 > - Say **'deploy'** and I'll publish it to Vercel and share a link
 > - Say **'tweak [thing]'** and I'll make adjustments before we ship
+> - Say **'handoff'** and I'll write the product handoff doc so product can review it and draft user stories
+
+If the designer says 'handoff', follow `.cursor/templates/5. create-handoff.md` (see `handoff.mdc`). The handoff can also be requested at any time later, not just here.
 
 ---
 
