@@ -16,7 +16,7 @@ Use the small token set and recipes in `css/styles.css` before inventing new val
 - **Shape:** controls and cards use `12px` corners; dialogs use `24px`.
 - **Spacing:** prefer the `4 / 8 / 12 / 16 / 32px` scale. Use `8px` from labels to fields and `32px` between form sections.
 - **Type:** use Inter for admin UI. Page titles are about `28px`, section titles `18px`, labels/body `14px`, and helper text `12px`. Reserve Oswald for score, stat, or performance displays.
-- **Density:** inputs are about `40px` high; primary and secondary action buttons are about `48px`; table headers and rows are about `48px`.
+- **Density:** inputs are about `40px` high; primary and secondary action buttons are about `40px`; table headers and rows are about `48px`.
 
 For common controls, reuse `.button`, `.button--primary`, `.field`, `.field-label`, `.helper-text`, `.dialog-backdrop`, and `.dialog`. These are intentionally approximate TDS recipes, not exact production components. Keep tables clean and dense with subtle row dividers rather than card styling on every row.
 

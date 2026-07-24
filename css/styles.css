@@ -70,7 +70,7 @@
 }
 
 .button {
-  min-height: 3rem;
+  min-height: 2.5rem;
   padding: var(--space-md) var(--space-lg);
   border: 0;
   border-radius: var(--radius-control);
