@@ -6,8 +6,8 @@ Kickoff always starts the same way. After discovery and the build check-in, pick
 
 | Path | When | What happens |
 |---|---|---|
-| **User testing** | They are testing with users | PRD file → task list file → setup → build, with a stop after each parent task |
-| **Concept** | They are showing a concept to the product team | No PRD file, no task list file. Private task list, then setup and build in one go |
+| **User testing** (full process) | They pick full process | PRD file → task list file → setup → build, with a stop after each parent task |
+| **Concept** (short version) | They pick short version | No PRD file, no task list file. Private task list, then setup and build in one go |
 
 **Do NOT:**
 
@@ -49,7 +49,7 @@ Ask all of the following in **one message**. Do not proceed until the designer h
 
 > **Before we start building, I need to understand what we're making.**
 >
-> 1. **Is this for user testing, or a concept for the product team?**
+> 1. **Full process (PRD, task list, step-by-step) or short version (confirm, then build)?**
 > 2. **What are we building?** (One or two sentences — what is the flow or feature?)
 > 3. **Who is the user in this prototype?** (e.g. player, coach, range operator)
 > 4. **Do you have a Figma link?** (Share any link — I'll pull the designs before we go further)
@@ -57,11 +57,9 @@ Ask all of the following in **one message**. Do not proceed until the designer h
 >
 > We'll use mock data unless you ask for real data.
 
-If they chose **user testing**, also ask in that same message (or immediately after if they answer 1 later):
+Map **full process** to the user testing path and **short version** to the concept path. Do not ask what they want to learn from testing.
 
-> **What's the one thing you most want to learn from testing this with a user?**
-
-If they already said "user testing" or "concept" in the first message, still ask the rest in one shot. Do not ask them to name the prototype. If you later need a filename slug (PRD, tasks, handoff), invent a short kebab-case name from what they are building.
+If they already said "full process", "short version", "user testing", or "concept" in the first message, still ask the rest in one shot. Do not ask them to name the prototype. If you later need a filename slug (PRD, tasks, handoff), invent a short kebab-case name from what they are building.
 
 **STOP. Do not run any commands or write any code until the designer has answered.**
 

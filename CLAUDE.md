@@ -14,9 +14,9 @@ A prototype template for Trackman product designers. The goal is always somethin
 
 When the user says anything like "I want to make a prototype", "start a prototype", or "set up a prototype":
 
-**Follow `.cursor/rules/prototype-workflow.mdc` exactly.** Kickoff always asks whether this is for **user testing** or a **concept for the product team**. Then:
+**Follow `.cursor/rules/prototype-workflow.mdc` exactly.** Kickoff always asks **full process** (PRD, task list, step-by-step) or **short version** (confirm, then build). Then:
 
-1. **Discovery** — kickoff questions in one message (path, what, who, Figma, out of scope). Mock data unless they ask for real data. Learning question only on the user-testing path. Do not ask them to name the prototype.
+1. **Discovery** — kickoff questions in one message (path, what, who, Figma, out of scope). Mock data unless they ask for real data. Do not ask them to name the prototype.
 2. **Figma + build check-in** — if a link was provided, inspect it. Always write three sentences on what you will build and wait for confirmation. If there is no Figma, still do the three sentences.
 3. **PRD** — **user testing only:** write the PRD using `.cursor/templates/1. create-prd.md`, get explicit designer approval. **Concept:** skip. No PRD file.
 4. **Task list** — **user testing only:** generate it using `.cursor/templates/2. generate-tasks.md`, get explicit designer approval. **Concept:** plan tasks privately; do not save or present a task file.

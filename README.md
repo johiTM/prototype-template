@@ -30,7 +30,7 @@ File → Open Folder → select your copy of the template.
 
 > "I want to make a prototype"
 
-Cursor will follow the workflow in `.cursor/rules/prototype-workflow.mdc`. It will ask if this is for user testing or a concept for the product team. User testing still uses a PRD and task list. Concept goes from a short check-in straight to build.
+Cursor will follow the workflow in `.cursor/rules/prototype-workflow.mdc`. It will ask if you want the full process (PRD, task list, step-by-step) or the short version (confirm, then build). Full process still uses a PRD and task list. Short version goes from a short check-in straight to build.
 
 ---
 

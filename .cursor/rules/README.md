@@ -8,7 +8,7 @@ This folder contains `.mdc` rule files that guide Cursor's behaviour when workin
 
 ### `prototype-workflow.mdc`
 
-Triggered when the user says anything like "I want to make a prototype" or "Start a prototype". Asks whether this is for user testing or a concept for the product team. User testing: discovery, PRD, task list, then setup and build. Concept: discovery, three-sentence check-in, then setup and build with no PRD or task files. Keep chat TLDR and designer-friendly. The designer does not need to use the terminal themselves.
+Triggered when the user says anything like "I want to make a prototype" or "Start a prototype". Asks full process (PRD, task list, step-by-step) or short version (confirm, then build). Full process: discovery, PRD, task list, then setup and build. Short version: discovery, three-sentence check-in, then setup and build with no PRD or task files. Keep chat TLDR and designer-friendly. The designer does not need to use the terminal themselves.
 
 ---
 
