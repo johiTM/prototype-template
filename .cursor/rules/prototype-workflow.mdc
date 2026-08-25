@@ -1,14 +1,20 @@
 # Starting a New Prototype
 
-## Mandatory sequence
+## Two paths
 
-**The sequence is always: Discovery → Figma → PRD → Task List → Setup → Build → Deploy. Never skip ahead.**
+Kickoff always starts the same way. After discovery and the build check-in, pick a path from the designer's answer to question 1:
+
+| Path | When | What happens |
+|---|---|---|
+| **User testing** | They are testing with users | PRD file → task list file → setup → build, with a stop after each parent task |
+| **Concept** | They are showing a concept to the product team | No PRD file, no task list file. Private task list, then setup and build in one go |
 
 **Do NOT:**
 
-- Run any commands or write any code before completing Steps 1–4
+- Run any commands or write any code before the designer has answered Step 1 and confirmed the three-sentence build check-in
 - Skip the Figma step if a link was provided
-- Start building before the PRD and task list are both written and approved
+- On the **user testing** path: start building before the PRD and task list are both written and approved
+- On the **concept** path: write a PRD or task list file, or wait for those approvals
 - Ask more than the questions listed in Step 1 — collect everything in one shot
 
 ---
@@ -27,53 +33,91 @@ Do not wait for the user to give you commands. You drive the flow from start to 
 
 ---
 
+## How to talk in this flow
+
+Keep every message short. Lead with the point. Designer-friendly, not developer-speak.
+
+- TLDR only. No preamble, no recap of what they just said, no "great question"
+- No AI filler. Do not use words like leverage, robust, seamless, streamline, or elevate
+- No walls of text. Short sentences. Lists when there are options
+
+---
+
 ## Step 1 — Discovery kickoff
 
 Ask all of the following in **one message**. Do not proceed until the designer has answered.
 
 > **Before we start building, I need to understand what we're making.**
 >
-> 1. **What's the prototype called?** (Short, no spaces — e.g. `coach-booking` or `session-review`)
+> 1. **Is this for user testing, or a concept for the product team?**
 > 2. **What are we building?** (One or two sentences — what is the flow or feature?)
 > 3. **Who is the user in this prototype?** (e.g. player, coach, range operator)
-> 4. **What's the one thing you most want to learn from testing this with a user?**
-> 5. **Do you have a Figma link?** (Share any link — I'll pull the designs before we write the PRD)
-> 6. **What is explicitly out of scope?** (Anything this prototype should NOT include)
-> 7. **Does it need a backend, or is mock data enough?**
+> 4. **Do you have a Figma link?** (Share any link — I'll pull the designs before we go further)
+> 5. **What is explicitly out of scope?** (Anything this prototype should NOT include)
+>
+> We'll use mock data unless you ask for real data.
+
+If they chose **user testing**, also ask in that same message (or immediately after if they answer 1 later):
+
+> **What's the one thing you most want to learn from testing this with a user?**
+
+If they already said "user testing" or "concept" in the first message, still ask the rest in one shot. Do not ask them to name the prototype. If you later need a filename slug (PRD, tasks, handoff), invent a short kebab-case name from what they are building.
 
 **STOP. Do not run any commands or write any code until the designer has answered.**
 
 ---
 
-## Step 2 — Figma inspection (if a link was provided)
+## Step 2 — Figma inspection and build check-in
 
-If the designer provided a Figma link in Step 1:
+### If a Figma link was provided
 
 1. Use the Figma MCP (`get_design_context`) to fetch the design for the linked node
 2. Read the designs and extract: layout, key screens, component patterns, copy, and any designer annotations
 3. Summarise what you found in a short message to the designer:
-   - Which screens / flows you can see (list the frame names — these become the candidate list of authoritative frames for the PRD)
+   - Which screens / flows you can see (list the frame names — these become the candidate list of authoritative frames)
    - Breakpoints present in the file (desktop / tablet / mobile)
    - Any motion or interaction annotations worth noting
    - Any design decisions or constraints worth noting
    - Anything unclear or missing from the designs
-4. Ask:
-   > "I've reviewed the Figma designs. Does this match what you want to build? Before I write the PRD, confirm: (a) which of these frames are authoritative for the build, (b) which breakpoints are in scope, and (c) whether motion/animations should be implemented."
+4. **Build check-in:** In the same message, write **three sentences** on what you are about to build (who it is for, the main flow, what is in vs out). This is the mini check for misunderstandings — especially on the concept path.
+
+Then ask, depending on path:
+
+**User testing:**
+
+> "I've reviewed the Figma designs. Does this match what you want to build? Before I write the PRD, confirm: (a) which of these frames are authoritative for the build, (b) which breakpoints are in scope, and (c) whether motion/animations should be implemented."
 
 Record the answers and carry them into the PRD's "Design Considerations" section (authoritative frames, Figma fidelity, breakpoints, motion).
 
+**Concept:**
+
+> "I've reviewed the Figma designs. Do those three sentences match what you want? Say **yes** and I'll start building."
+
 Wait for the designer's confirmation before continuing.
 
-If no Figma link was provided, skip this step and go straight to Step 3.
+### If no Figma link was provided
+
+Still send the **three-sentence build check-in** (who it is for, the main flow, what is in vs out).
+
+**User testing:** Then go to Step 3.
+
+**Concept:** Ask:
+
+> "Do those three sentences match what you want? Say **yes** and I'll start building."
+
+Wait for yes, then skip Steps 3–4 (files) and go to Step 5.
 
 ---
 
-## Step 3 — Write the PRD
+## Step 3 — Write the PRD (user testing path only)
 
-Follow `.cursor/templates/1. create-prd.md` to generate the PRD.
+On the **concept** path: skip this step. Do not write or save a PRD.
+
+On the **user testing** path, follow `.cursor/templates/1. create-prd.md` to generate the PRD.
 
 - Use the answers from Step 1 and the Figma inspection from Step 2 as your source material
 - Do not ask additional clarifying questions unless something is genuinely ambiguous
+- Invent a short kebab-case filename slug from what they are building
 - Save the PRD to `.cursor/documents/prds/` using the naming convention in the template
 
 Once the PRD is written, share it with the designer and say:
@@ -84,7 +128,9 @@ Once the PRD is written, share it with the designer and say:
 
 ---
 
-## Step 4 — Generate the task list
+## Step 4 — Task list
+
+### User testing path
 
 Once the PRD is approved, read the PRD file you just saved and follow `.cursor/templates/2. generate-tasks.md` to generate the task list.
 
@@ -98,13 +144,21 @@ Once the full task list is written, say:
 
 **STOP. Do not run any commands until the designer says 'start' or equivalent.**
 
+### Concept path
+
+Do not save a task list file. Do not present tasks for approval.
+
+Silently plan the work using the same breakdown you would have put in a task list (scaffold, screens, interactions). Keep that plan to yourself. After the three-sentence check-in is confirmed, go straight to Step 5.
+
 ---
 
 ## Step 5 — Project setup
 
-Only run this after the designer has approved the task list.
+**User testing:** Only after the designer has approved the task list.
 
-Run the following in sequence. Tell the user what you're doing at each step.
+**Concept:** Right after they confirm the three-sentence check-in.
+
+Run the following in sequence. Keep the update short.
 
 ### 5a. Static site scaffold
 
@@ -115,7 +169,7 @@ Ensure the project has:
 - `js/main.js` — bootstraps the UI
 - `js/mockData.js` — mock data module
 
-If the repo is this template, these files may already exist — extend them rather than replacing wholesale unless the PRD requires a different structure.
+If the repo is this template, these files may already exist — extend them rather than replacing wholesale unless the build needs a different structure.
 
 ### 5b. Fonts
 
@@ -123,7 +177,7 @@ Use Google Fonts (or equivalent) in `index.html` for **Inter** (body) and **Oswa
 
 ### 5c. Mock data
 
-Ensure `js/mockData.js` exists and exports realistic placeholder data; expand during build tasks.
+Ensure `js/mockData.js` exists and exports realistic placeholder data; expand during the build.
 
 ### 5d. Start a local static server
 
@@ -135,29 +189,47 @@ npx serve .
 
 (Or another static server the environment supports.)
 
-Tell the designer:
+**User testing:**
 
 > "Setup is done — open the URL shown in the terminal (often http://localhost:3000). Starting Task 1 now."
+
+**Concept:**
+
+> "Setup is done — open the URL shown in the terminal (often http://localhost:3000). Building now."
 
 ---
 
 ## Step 6 — Build
 
-Follow `.cursor/templates/3. process-task-list.md` for the full task execution protocol. Key rules:
+If the Figma link was provided, refer back to the designs throughout to validate visual accuracy.
+
+All active Cursor rules apply as normal during the build (design-system guidance, fonts, mock data conventions, prototype scope, etc.).
+
+### User testing path
+
+Follow `.cursor/templates/3. process-task-list.md` for the full task execution protocol.
 
 - Before starting, read the saved PRD and task list files — use them as the source of truth throughout the build, not the conversation history
-- All active Cursor rules apply as normal during the build (design-system guidance, fonts, mock data conventions, prototype scope, etc.)
 - Work through tasks one at a time
 - After each **parent task** completes, check the browser and report back:
   > "Task [n] is done — here's what was built: [short summary]. Want a quick review before I move on, or shall I go straight to Task [n+1]?"
 - Do not start the next task until the designer says yes
-- If the Figma link was provided, refer back to the designs throughout to validate visual accuracy
+
+### Concept path
+
+Do not follow the per-parent-task approval stops in `3. process-task-list.md`.
+
+- Work through your private task list
+- Check the browser as you go
+- Do not pause after each screen or task for permission
+- Stop only if something is genuinely unclear
+- When the flow is clickable, go to Step 7
 
 ---
 
 ## Step 7 — Wrap-up
 
-When all tasks in the task list are complete, say:
+When the build is complete, say:
 
 > "The prototype is done. Here's what was built: [brief summary of screens/flows]."
 >
@@ -166,7 +238,7 @@ When all tasks in the task list are complete, say:
 > - Say **'tweak [thing]'** and I'll make adjustments before we ship
 > - Say **'handoff'** and I'll write the product handoff doc so product can review it and draft user stories
 
-If the designer says 'handoff', follow `.cursor/templates/5. create-handoff.md` (see `handoff.mdc`). The handoff can also be requested at any time later, not just here.
+If the designer says 'handoff', follow `.cursor/templates/5. create-handoff.md` (see `handoff.mdc`). The handoff can also be requested at any time later, not just here. A missing PRD or task list is fine.
 
 ---
 
@@ -175,7 +247,8 @@ If the designer says 'handoff', follow `.cursor/templates/5. create-handoff.md` 
 - Never ask the designer to open a terminal
 - Run all commands yourself
 - If a command fails, fix it and retry silently before telling the user
-- From Step 4 onwards, always read the saved PRD and task list files at the start of each step — never rely on conversation history as the source of requirements
+- **User testing:** from Step 4 onwards, always read the saved PRD and task list files at the start of each step — never rely on conversation history as the source of requirements
+- **Concept:** the three-sentence check-in plus the chat answers are the source of requirements
 - All `.cursor/rules/` apply throughout the entire flow — this workflow does not override them, it sequences them
 - Refer to `prototype-scope.mdc` throughout for what to build and what to skip
-- If the designer starts describing what to build before the PRD is approved, collect their input but redirect: use it as additional input to the PRD rather than starting to build
+- If the designer starts describing what to build before the path's gate is cleared (PRD approved on user testing, or three-sentence yes on concept), collect their input and fold it in rather than starting to build

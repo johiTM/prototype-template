@@ -8,7 +8,7 @@ This folder contains `.mdc` rule files that guide Cursor's behaviour when workin
 
 ### `prototype-workflow.mdc`
 
-Triggered when the user says anything like "I want to make a prototype" or "Start a prototype". Drives the full workflow — discovery, PRD, task list, then static site setup and build. The designer does not need to use the terminal themselves.
+Triggered when the user says anything like "I want to make a prototype" or "Start a prototype". Asks whether this is for user testing or a concept for the product team. User testing: discovery, PRD, task list, then setup and build. Concept: discovery, three-sentence check-in, then setup and build with no PRD or task files. Keep chat TLDR and designer-friendly. The designer does not need to use the terminal themselves.
 
 ---
 
@@ -63,8 +63,8 @@ Sets expectations for what a prototype should and shouldn't include.
 - Build-first: reads the prototype and prior chat first; PRD and task list are light backup
 - Plain language, no jargon; edge cases framed as user situations
 - Puts reviewer links up top and states how we will know the learning goal worked
-- Saves to `.cursor/documents/handoffs/handoff-[prd-file-name].md`; updates in place if it exists
-- Available on demand any time, not just at wrap-up
+- Saves to `.cursor/documents/handoffs/handoff-[prd-file-name].md`; updates in place if it exists. No PRD: use a kebab-case slug from what was built
+- Available on demand any time, including the concept path with no PRD
 
 ---
 

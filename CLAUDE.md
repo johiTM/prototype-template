@@ -6,7 +6,7 @@ This is a starting point for Trackman product prototypes. Read this file before 
 
 ## What this is
 
-A prototype template for Trackman product designers. The goal is always something testable with real users, built fast. Optimise for speed over production hardening (error handling, accessibility passes, performance tuning, edge-case coverage) — but layout, typography, spacing and colour should still match the agreed Figma frames unless the PRD says otherwise.
+A prototype template for Trackman product designers. The goal is always something testable, built fast — either with real users or as a concept for the product team. Optimise for speed over production hardening (error handling, accessibility passes, performance tuning, edge-case coverage) — but layout, typography, spacing and colour should still match the agreed Figma frames unless the PRD says otherwise.
 
 ---
 
@@ -14,17 +14,17 @@ A prototype template for Trackman product designers. The goal is always somethin
 
 When the user says anything like "I want to make a prototype", "start a prototype", or "set up a prototype":
 
-**Follow `.cursor/rules/prototype-workflow.mdc` exactly.** That file defines the full sequence:
+**Follow `.cursor/rules/prototype-workflow.mdc` exactly.** Kickoff always asks whether this is for **user testing** or a **concept for the product team**. Then:
 
-1. **Discovery** — ask all kickoff questions in one message (what, who, Figma link, out of scope, backend or mock)
-2. **Figma** — if a link was provided, inspect it with the Figma MCP and summarise findings before writing anything
-3. **PRD** — write the PRD using `.cursor/templates/1. create-prd.md`, get explicit designer approval before continuing
-4. **Task list** — generate it using `.cursor/templates/2. generate-tasks.md`, get explicit designer approval before continuing
-5. **Setup** — only after approval: ensure the static HTML/CSS/JS layout exists, fonts are linked, mock data file present, start a local static server
-6. **Build** — work through the task list one task at a time using `.cursor/templates/3. process-task-list.md`, check in after each parent task
+1. **Discovery** — kickoff questions in one message (path, what, who, Figma, out of scope). Mock data unless they ask for real data. Learning question only on the user-testing path. Do not ask them to name the prototype.
+2. **Figma + build check-in** — if a link was provided, inspect it. Always write three sentences on what you will build and wait for confirmation. If there is no Figma, still do the three sentences.
+3. **PRD** — **user testing only:** write the PRD using `.cursor/templates/1. create-prd.md`, get explicit designer approval. **Concept:** skip. No PRD file.
+4. **Task list** — **user testing only:** generate it using `.cursor/templates/2. generate-tasks.md`, get explicit designer approval. **Concept:** plan tasks privately; do not save or present a task file.
+5. **Setup** — static HTML/CSS/JS, fonts, mock data, local static server. User testing: after task list approval. Concept: after the three-sentence yes.
+6. **Build** — **user testing:** one task at a time using `.cursor/templates/3. process-task-list.md`, check in after each parent task. **Concept:** build through without per-task stops; stop only if something is unclear.
 7. **Wrap-up** — offer to deploy to Vercel, continue tweaking, or write the product handoff doc (deploy via `.cursor/rules/deploy.mdc` — password gate required before `npx vercel`; handoff via `.cursor/rules/handoff.mdc`)
 
-**Do not run any commands or write any code until Steps 1–4 are complete and approved.**
+**Do not run any commands or write any code until Step 1 is answered and the three-sentence build check-in is confirmed.** On the user-testing path, also wait for PRD and task list approval before setup and build.
 
 ---
 
@@ -96,9 +96,10 @@ Load via Google Fonts in `index.html` (see the starter file). Do not rely on sys
 
 ### The one question to ask before building anything
 
-> "Does this help test the idea with a user, or am I just over-engineering?"
+> User testing: "Does this help test the idea with a user, or am I just over-engineering?"
+> Concept: "Does this help show the idea to the product team, or am I just over-engineering?"
 
-If it doesn't help test the idea — skip it.
+If it doesn't help — skip it.
 
 ### Complexity check
 
@@ -169,9 +170,9 @@ When the user says "create the handoff documentation", "update the handoff docum
 2. Read the prototype and prior chat first; use the PRD and task list as light backup, not the main source
 3. Fill everything you can from the build before asking the user anything
 4. Give reviewer links up top (deployed `?pw=` link, Figma, PRD, task list) and use unchecked task list items to show what is left
-5. Save to `.cursor/documents/handoffs/handoff-[prd-file-name].md`; update in place if it already exists
+5. Save to `.cursor/documents/handoffs/handoff-[prd-file-name].md`; update in place if it already exists. If there is no PRD, use a kebab-case slug from what was built.
 
-Covers: learning goal, how we will know it worked, what's built, main user stories, prototype vs product, user paths, edge cases, in / out of scope, open questions and assumptions. Write it in plain, non-technical language with edge cases framed as user situations. Available on demand any time a PRD exists.
+Covers: learning goal, how we will know it worked, what's built, main user stories, prototype vs product, user paths, edge cases, in / out of scope, open questions and assumptions. Write it in plain, non-technical language with edge cases framed as user situations. Available on demand after a prototype exists, including the concept path with no PRD.
 
 ---
 
@@ -202,6 +203,8 @@ Without this, output will be generic. The more context, the better the output.
 
 - Act as a senior full-stack developer and senior product designer
 - Assume the reader is a product designer — not a developer
+- TLDR only. Lead with the point. No preamble, no recap, no filler
+- Keep it designer-friendly and AI-slop free. Do not use words like leverage, robust, seamless, streamline, or elevate
 - Be short and to the point — no long explanations unless asked
 - When something needs a decision, present options clearly rather than assuming
 - Ask before assuming on anything product or data related

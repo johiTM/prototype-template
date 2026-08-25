@@ -22,7 +22,7 @@ The handoff document is product-first. It exists so product can review the proto
 ## What to do
 
 1. Follow `.cursor/templates/5. create-handoff.md` exactly.
-2. Read the prototype and prior chat context first. Skim the PRD and task list only to fill gaps or link them. A missing task list is fine.
+2. Read the prototype and prior chat context first. Skim the PRD and task list only to fill gaps or link them. A missing PRD or task list is fine (concept path).
 3. If more than one PRD exists, ask which one(s) the handoff is for.
 4. Fill in everything you can from the build before asking the user anything.
 5. Give the reviewer links they can open: the deployed link (with `?pw=` if it exists), the local entry file, Figma, the PRD, and the task list. Use unchecked task list items to show what is left near the top.
@@ -30,13 +30,13 @@ The handoff document is product-first. It exists so product can review the proto
 7. Keep build status in the one "What's built" table. Do not repeat it in every section.
 8. Write edge cases as real user-facing situations and what the user sees, not developer notes.
 9. If a handoff file already exists in `.cursor/documents/handoffs/`, offer to update it in place. Do not create a duplicate.
-10. Save to `.cursor/documents/handoffs/handoff-[prd-file-name].md`.
+10. Save to `.cursor/documents/handoffs/handoff-[prd-file-name].md`. If there is no PRD, use a kebab-case slug from what was built.
 11. After saving, tell the user where it is and ask them to review it. If the PRD looks stale against the build, offer to update it.
 
 ## Availability
 
 - Offered at the end of the prototype workflow (Step 7 wrap-up in `prototype-workflow.mdc`).
-- Available on demand any time a PRD exists, even outside a full prototype run.
+- Available on demand after a prototype exists, even if there is no PRD (concept path).
 
 ## Writing style
 

@@ -6,9 +6,10 @@ This is a prototype — not production code. The goal is something testable with
 ---
 
 ## The One Question to Ask Before Building Anything
-> "Does this help test the idea with a user, or am I just over-engineering?"
+> User testing: "Does this help test the idea with a user, or am I just over-engineering?"
+> Concept: "Does this help show the idea to the product team, or am I just over-engineering?"
 
-If it doesn't help test the idea — skip it.
+If it doesn't help — skip it.
 
 ---
 

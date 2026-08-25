@@ -26,7 +26,7 @@ This directory contains the step-by-step process for developing features using C
 
 ## Workflow
 
-The typical development workflow follows this sequence:
+The **user testing** path follows this sequence:
 
 ```
 User Request
@@ -41,6 +41,8 @@ User Request
     ↓
 Complete Feature
 ```
+
+The **concept** path skips the PRD and task list files. See `.cursor/rules/prototype-workflow.mdc`.
 
 ## File Locations
 
