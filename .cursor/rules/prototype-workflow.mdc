@@ -2,12 +2,12 @@
 
 ## Two paths
 
-Kickoff always starts the same way. After discovery and the build check-in, pick a path from the designer's answer to question 1:
+Kickoff always starts the same way. After discovery and the build check-in, pick a path from the designer's answer to question 5:
 
 | Path | When | What happens |
 |---|---|---|
-| **User testing** (full process) | They pick full process | PRD file → task list file → setup → build, with a stop after each parent task |
-| **Concept** (short version) | They pick short version | No PRD file, no task list file. Private task list, then setup and build in one go |
+| **User testing** (PRD and task list first) | They pick PRD and task list first | PRD file → task list file → setup → build, with a stop after each parent task |
+| **Concept** (build right away) | They pick build right away | No PRD file, no task list file. Private task list, then setup and build in one go |
 
 **Do NOT:**
 
@@ -49,17 +49,17 @@ Ask all of the following in **one message**. Do not proceed until the designer h
 
 > **Before we start building, I need to understand what we're making.**
 >
-> 1. **Full process (PRD, task list, step-by-step) or short version (confirm, then build)?**
-> 2. **What are we building?** (One or two sentences — what is the flow or feature?)
-> 3. **Who is the user in this prototype?** (e.g. player, coach, range operator)
-> 4. **Do you have a Figma link?** (Share any link — I'll pull the designs before we go further)
-> 5. **What is explicitly out of scope?** (Anything this prototype should NOT include)
+> 1. **What are we building?** (One or two sentences — what is the flow or feature?)
+> 2. **Who is the user in this prototype?** (e.g. player, coach, range operator)
+> 3. **Do you have a Figma link?** (Share any link — I'll pull the designs before we go further)
+> 4. **What is explicitly out of scope?** (Anything this prototype should NOT include)
+> 5. **Build the prototype right away, or write a PRD and task list first?**
 >
 > We'll use mock data unless you ask for real data.
 
-Map **full process** to the user testing path and **short version** to the concept path. Do not ask what they want to learn from testing.
+Map **write a PRD and task list first** to the user testing path and **build the prototype right away** to the concept path. Do not ask what they want to learn from testing.
 
-If they already said "full process", "short version", "user testing", or "concept" in the first message, still ask the rest in one shot. Do not ask them to name the prototype. If you later need a filename slug (PRD, tasks, handoff), invent a short kebab-case name from what they are building.
+If they already said "build right away", "PRD and task list", "user testing", or "concept" in the first message, still ask the rest in one shot. Do not ask them to name the prototype. If you later need a filename slug (PRD, tasks, handoff), invent a short kebab-case name from what they are building.
 
 **STOP. Do not run any commands or write any code until the designer has answered.**
 
