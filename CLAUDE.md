@@ -44,7 +44,20 @@ When the user says anything like "I want to make a prototype", "start a prototyp
 - Styles: `css/*.css` — use variables in `:root` for brand-aligned colours (see `.cursor/rules/design-system.mdc`)
 - Scripts: `js/*.js` — `type="module"` for imports between files
 - Mock data: `js/mockData.js` (or split into `js/data/*.js` if it grows)
+- Images and icons: `images/` at project root — everything you export from Figma or create yourself goes here
 - No React, no Tailwind, no build step required for the default flow
+
+**Assets — where files go**
+
+| Folder | Who puts things there | Deploys? |
+|---|---|---|
+| `images/` | You — icons exported from Figma, logos, illustrations, screenshots used in the UI | Yes |
+| `assets/` | The designer only — private local files (DB exports, PDFs, reference screenshots) | No |
+
+- Put every asset you export or create in `images/` (subfolders like `images/icons/` are fine). Reference it as `images/icons/close.svg`.
+- **Never** write to `assets/`. It is git-ignored and excluded from deploys, so anything you put there is missing on the live link.
+- **Never** create a root-level `public/` folder. Vercel treats a root `public/` as the whole site and the prototype breaks.
+- Only read from `assets/` when the designer points you at a file in there. If they want it in the UI, copy it into `images/` first.
 
 ---
 
@@ -131,8 +144,12 @@ my-prototype/
   js/
     main.js           ← bootstraps the UI
     mockData.js       ← mock data
-  public/             ← optional static assets (images, etc.)
+  images/             ← public images and icons (Figma exports, logos) — deploys
+    icons/
+  assets/             ← designer's private local files — never deploys, never write here
 ```
+
+Do not add a root-level `public/` folder — Vercel would serve it as the whole site.
 
 ---
 

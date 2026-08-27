@@ -79,6 +79,7 @@ js/config.local.js
 
 # Local assets — user-dropped files (DB exports, screenshots, PDFs) stay local only.
 # Keep the empty folder in the template, but never commit its contents.
+# Assets the prototype needs (Figma icon exports, logos) belong in images/ instead.
 assets/*
 !assets/.gitkeep
 

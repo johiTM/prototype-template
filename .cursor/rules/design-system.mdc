@@ -21,3 +21,7 @@ Use the small token set and recipes in `css/styles.css` before inventing new val
 For common controls, reuse `.button`, `.button--primary`, `.field`, `.field-label`, `.helper-text`, `.dialog-backdrop`, and `.dialog`. These are intentionally approximate TDS recipes, not exact production components. Keep tables clean and dense with subtle row dividers rather than card styling on every row.
 
 For Figma-to-build fidelity, use **Figma inspect + designer agreement** on colours and type; this rule file is only a lightweight reminder, not a token dictionary.
+
+## Where Figma exports go
+
+Save icons, logos, and images you pull out of Figma in `images/` (for example `images/icons/close.svg`). Never save them in `assets/` — that folder is the designer's private local space and does not deploy, so the prototype would show broken images on the live link. Never create a root-level `public/` folder either.

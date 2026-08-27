@@ -144,6 +144,8 @@ npx vercel --prod
 
 - Deploy with `npx vercel --yes` / `--prod` without checking for `middleware.js`, `vercel.json`, `package.json` (`@vercel/edge`), and `PROTO_PASSWORD`
 - Configure middleware via `vercel.json` `functions` / `runtime` — that breaks the build (`Function Runtimes must have a valid version`); root `middleware.js` is automatic
+- Put images or icons the prototype needs in `assets/` — that folder is in `.vercelignore` and will not deploy, so they break on the live link. Public assets live in `images/`
+- Create a root-level `public/` folder — Vercel would serve it as the whole site and the prototype breaks
 - Share a production URL without `?pw=` on first share
 - Assume Hobby “Vercel Authentication” covers this — this template uses Edge Middleware instead
 - Skip password setup because it lives in a “later” section — it is part of the deploy sequence above

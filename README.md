@@ -10,6 +10,8 @@ A starting point for Trackman product prototypes: plain HTML, CSS, and JavaScrip
 |---|---|
 | `index.html` | Entry page — links fonts, CSS, and `js/main.js` |
 | `css/`, `js/` | Starter styles and ES modules (including `mockData.js`) |
+| `images/` | Public images and icons — Figma exports and anything Cursor creates. Gets deployed |
+| `assets/` | Your private folder — DB exports, PDFs, reference screenshots. Never committed, never deployed |
 | `CLAUDE.md` | Project context for Claude Code — read automatically when you start a session |
 | `.cursor/rules/` | Cursor rules — loaded automatically when you open the project in Cursor |
 | `.cursor/templates/` | Workflow templates for PRDs, task lists, and code reviews |
@@ -51,6 +53,7 @@ Cursor will follow the workflow in `.cursor/rules/prototype-workflow.mdc`. It wi
 
 - **On-brand look** — orange accent, light grey page background — see `.cursor/rules/design-system.mdc`
 - **Mock data** — keep it in `js/mockData.js` (realistic yards, mph, names — no Lorem Ipsum)
+- **Assets** — icons and images the prototype shows go in `images/`. `assets/` is yours alone and stays off the deployed link
 - **Happy path only** — skip auth, error states, loading states unless you're specifically testing them
 
 ---

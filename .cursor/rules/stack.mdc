@@ -28,10 +28,13 @@ my-prototype/
   index.html          ← entry HTML
   css/                ← stylesheets
   js/                 ← scripts and mock data
-  public/             ← optional images and assets
+  images/             ← public images and icons (Figma exports) — deploys
+  assets/             ← designer's private local files — never deploys
   .cursor/
     rules/
 ```
+
+Do not add a root-level `public/` folder — Vercel treats a root `public/` as the whole site and the prototype breaks.
 
 ---
 
@@ -52,6 +55,13 @@ my-prototype/
 
 - Use `<script type="module" src="js/main.js">` in `index.html`
 - Local development must use a static HTTP server so ES modules work (`npx serve .`, `python3 -m http.server`, etc.)
+
+**Images and icons**
+
+- Anything you export from Figma or create yourself goes in `images/` — icons, logos, illustrations, UI screenshots. Subfolders like `images/icons/` are fine. Reference as `images/icons/close.svg`
+- `assets/` belongs to the designer. It is git-ignored and excluded from deploys, so never save files there — they would be missing on the live link
+- Read from `assets/` only when the designer points you at a file. If it needs to show in the UI, copy it into `images/` first
+- Never create a root-level `public/` folder
 
 ---
 

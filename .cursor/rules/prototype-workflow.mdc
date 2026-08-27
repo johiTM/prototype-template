@@ -166,8 +166,11 @@ Ensure the project has:
 - `css/styles.css` — global styles and `:root` variables (see design-system.mdc for brand alignment)
 - `js/main.js` — bootstraps the UI
 - `js/mockData.js` — mock data module
+- `images/` — for icons and images you export from Figma or create (create it when you have the first file)
 
 If the repo is this template, these files may already exist — extend them rather than replacing wholesale unless the build needs a different structure.
+
+Assets rule: everything you export or create goes in `images/`. `assets/` is the designer's private folder — never save files there (it does not deploy), and only read from it when they point you at a file. Never create a root-level `public/` folder.
 
 ### 5b. Fonts
 
