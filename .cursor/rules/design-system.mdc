@@ -13,10 +13,20 @@ When styling prototypes:
 Use the small token set and recipes in `css/styles.css` before inventing new values:
 
 - **Colour:** dark primary content, softer secondary/helper text, subtle translucent strokes, white elevated surfaces, and orange primary actions.
-- **Shape:** controls and cards use `12px` corners; dialogs use `24px`.
-- **Spacing:** prefer the `4 / 8 / 12 / 16 / 32px` scale. Use `8px` from labels to fields and `32px` between form sections.
-- **Type:** use Inter for admin UI. Page titles are about `28px`, section titles `18px`, labels/body `14px`, and helper text `12px`. Reserve Oswald for score, stat, or performance displays.
-- **Density:** inputs are about `40px` high; primary and secondary action buttons are about `40px`; table headers and rows are about `48px`.
+- **Shape:** controls and cards use `0.75rem` (12px) corners; dialogs use `1.5rem` (24px).
+- **Spacing:** prefer the `0.25 / 0.5 / 0.75 / 1 / 2rem` (4 / 8 / 12 / 16 / 32px) scale. Use `0.5rem` from labels to fields and `2rem` between form sections.
+- **Type:** use Inter for admin UI. Page titles `1.75rem` (28px), section titles `1.125rem` (18px), body copy, inputs and buttons `1rem` (16px), labels, table cells and nav `0.875rem` (14px), helper text and counters `0.75rem` (12px). Reserve Oswald for score, stat, or performance displays.
+- **Density:** inputs, buttons and icon buttons are `2.5rem` (40px); table headers, table rows and menu rows are `3rem` (48px).
+
+## Sizing is rem, not px
+
+Every font size, control height, spacing value, and icon dimension goes in `rem`, driven by the tokens in `css/styles.css`. The reader's browser text-size setting is what the scale multiplies from, so the whole UI scales with it.
+
+- **Never** set a px `font-size` on `html` or `:root`. That locks the scale and breaks the browser preference.
+- **Never** go below `0.75rem` (12px) for any text.
+- Do not read px straight off a Figma export and use it as-is. Figma frames are often exported at a narrower width, which makes body copy look like 9–11px. Map to the token scale above instead.
+- Hairline borders and shadow offsets can stay in px.
+- Sanity check a build by setting the browser font size to 200%: text should roughly double with nothing clipped or overlapping (WCAG 1.4.4).
 
 For common controls, reuse `.button`, `.button--primary`, `.field`, `.field-label`, `.helper-text`, `.dialog-backdrop`, and `.dialog`. These are intentionally approximate TDS recipes, not exact production components. Keep tables clean and dense with subtle row dividers rather than card styling on every row.
 
